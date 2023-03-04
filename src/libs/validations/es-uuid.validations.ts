@@ -1,4 +1,11 @@
 
+/**
+ *Funsión que valida que una cadena de caracteres tenga la estructura de un uuid v4
+ *
+ * @export
+ * @param {string} valor
+ * @return {*}  {boolean}
+ */
 export function EsUuid(valor: string): boolean {
 
     const regex =
