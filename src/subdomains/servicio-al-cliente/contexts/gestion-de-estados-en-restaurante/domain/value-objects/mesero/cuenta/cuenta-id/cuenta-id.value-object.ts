@@ -11,10 +11,21 @@ export class CuentaIdValueObject extends ValueObjectBase<string> {
         super(value ? value : uuid());
     }
     
+    /**
+     *Funsión que realiza todas las validaciones
+     *
+     * @memberof CuentaIdValueObject
+     */
     validateData(): void {
         this.validateStructure();
     }
 
+    /**
+     *Funsión que valida la estructura de un uuid v4
+     *
+     * @private
+     * @memberof CuentaIdValueObject
+     */
     private validateStructure(): void {
         if(this.value && EsUuid(this.value) === false) {
 

@@ -11,10 +11,21 @@ export class MeseroIdValueObject extends ValueObjectBase<string> {
         super(value ? value : uuid());
     }
     
+    /**
+     *Funsión que realiza todas las validaciones
+     *
+     * @memberof MeseroIdValueObject
+     */
     validateData(): void {
         this.validateStructure();
     }
 
+    /**
+     *Funsión que valida la estructura de un uuid v4
+     *
+     * @private
+     * @memberof MeseroIdValueObject
+     */
     private validateStructure(): void {
         if(this.value && EsUuid(this.value) === false) {
 
