@@ -1,11 +1,11 @@
 import { v4 as uuid } from 'uuid';
 
-import { EsUuid } from '../../../../../../../../libs/validations';
-import { ValueObjectBase } from '../../../../../../../../libs/sofka/bases';
-import { IErrorValueObject } from '../../../../../../../../libs/sofka/interface';
+import { EsUuid } from '../../../../../../../../../libs/validations';
+import { ValueObjectBase } from '../../../../../../../../../libs/sofka/bases';
+import { IErrorValueObject } from '../../../../../../../../../libs/sofka/interface';
 
 
-export class MeseroIdValueObject extends ValueObjectBase<string> {
+export class CuentaIdValueObject extends ValueObjectBase<string> {
 
     constructor(value?: string) {
         super(value ? value : uuid());
@@ -19,7 +19,7 @@ export class MeseroIdValueObject extends ValueObjectBase<string> {
         if(this.value && EsUuid(this.value) === false) {
 
             const error: IErrorValueObject = {
-                field: 'MeseroId',
+                field: 'CuentaId',
                 message: 'El id no tiene una estructura válida UUIDV4'
             };
 

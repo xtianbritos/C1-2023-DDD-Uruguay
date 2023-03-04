@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
+import { EsUuid } from '../../../../../../../../libs/validations';
 import { ValueObjectBase } from '../../../../../../../../libs/sofka/bases';
 import { IErrorValueObject } from '../../../../../../../../libs/sofka/interface';
 
