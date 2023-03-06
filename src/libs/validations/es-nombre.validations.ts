@@ -8,7 +8,8 @@
  */
 export function EsNombre(valor: string): boolean {
 
-    const regex =/ ^ [a-zA-Z] + [a-zA-Z] + $ /;
+    const regex =
+        /^([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú]+))*$/;
 
     const matches = valor.match(regex);
 
