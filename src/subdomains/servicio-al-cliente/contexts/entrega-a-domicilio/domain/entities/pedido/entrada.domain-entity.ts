@@ -1,31 +1,25 @@
-import { CuentaIdValueObject, FueEntregadaValueObject, PagoFueRecibidoValueObject, VueltoFueEntregadoValueObject } from "../value-objects/mesero/cuenta";
-import { ICuentaDomainEntity } from "./interfaces";
-
 import { v4 as uuid } from 'uuid';
 
+import { EntradaIdValueObject, NombreValueObject } from '../../value-objects/pedido/entrada';
+import { IEntradaDomainEntity } from '../interfaces/pedido';
+
 /**
- *Clase base de entidad Cuenta
+ *Clase base de entidad Entrada
  *
  * @export
- * @class CuentaDomainEntityBase
- * @implements {ICuentaDomainEntity}
+ * @class EntradaDomainEntityBase
+ * @implements {IEntradaDomainEntity}
  */
-export class CuentaDomainEntityBase implements ICuentaDomainEntity {
-    cuentaId?: string | CuentaIdValueObject;
-    pagoFueRecibido?: boolean | PagoFueRecibidoValueObject;
-    vueltoFueEntregado?: boolean | VueltoFueEntregadoValueObject;
-    cuentaFueEntregada?: boolean | FueEntregadaValueObject;
+export class EntradaDomainEntityBase implements IEntradaDomainEntity {
+    entradaId?: string | EntradaIdValueObject;
+    nombre?: string | NombreValueObject;
     createdAt?: number | Date;
 
-    constructor(_data?: ICuentaDomainEntity) {
-        if(_data.cuentaId) this.cuentaId = _data.cuentaId;
-        else this.cuentaId = uuid();
+    constructor(_data?: IEntradaDomainEntity) {
+        if(_data.entradaId) this.entradaId = _data.entradaId;
+        else this.entradaId = uuid();
 
-        if(_data.pagoFueRecibido) this.pagoFueRecibido = _data.pagoFueRecibido;
-
-        if(_data.vueltoFueEntregado) this.vueltoFueEntregado = _data.vueltoFueEntregado;
-
-        if(_data.cuentaFueEntregada) this.cuentaFueEntregada = _data.cuentaFueEntregada;
+        if(_data.nombre) this.nombre = _data.nombre;
 
         this.createdAt = new Date();
     }

@@ -1,31 +1,31 @@
-import { CuentaIdValueObject, FueEntregadaValueObject, PagoFueRecibidoValueObject, VueltoFueEntregadoValueObject } from "../value-objects/mesero/cuenta";
-import { ICuentaDomainEntity } from "./interfaces";
-
 import { v4 as uuid } from 'uuid';
 
+import { NombreValueObject, TamanioValueObject, PostreIdValueObject, EsParaVeganosValueObject } from '../../value-objects/pedido/postre';
+import { IPostreDomainEntity } from '../interfaces/pedido';
+
 /**
- *Clase base de entidad Cuenta
+ *Clase base de entidad Postre
  *
  * @export
- * @class CuentaDomainEntityBase
- * @implements {ICuentaDomainEntity}
+ * @class PostreDomainEntityBase
+ * @implements {IPostreDomainEntity}
  */
-export class CuentaDomainEntityBase implements ICuentaDomainEntity {
-    cuentaId?: string | CuentaIdValueObject;
-    pagoFueRecibido?: boolean | PagoFueRecibidoValueObject;
-    vueltoFueEntregado?: boolean | VueltoFueEntregadoValueObject;
-    cuentaFueEntregada?: boolean | FueEntregadaValueObject;
+export class PostreDomainEntityBase implements IPostreDomainEntity {
+    postreId?: string | PostreIdValueObject;
+    nombre?: string | NombreValueObject;
+    tamanio?: string | TamanioValueObject;
+    esParaVeganos?: boolean | EsParaVeganosValueObject;
     createdAt?: number | Date;
 
-    constructor(_data?: ICuentaDomainEntity) {
-        if(_data.cuentaId) this.cuentaId = _data.cuentaId;
-        else this.cuentaId = uuid();
+    constructor(_data?: IPostreDomainEntity) {
+        if(_data.postreId) this.postreId = _data.postreId;
+        else this.postreId = uuid();
 
-        if(_data.pagoFueRecibido) this.pagoFueRecibido = _data.pagoFueRecibido;
+        if(_data.nombre) this.nombre = _data.nombre;
 
-        if(_data.vueltoFueEntregado) this.vueltoFueEntregado = _data.vueltoFueEntregado;
+        if(_data.tamanio) this.tamanio = _data.tamanio;
 
-        if(_data.cuentaFueEntregada) this.cuentaFueEntregada = _data.cuentaFueEntregada;
+        if(_data.esParaVeganos) this.esParaVeganos = _data.esParaVeganos;
 
         this.createdAt = new Date();
     }

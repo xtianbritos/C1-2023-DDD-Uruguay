@@ -1,31 +1,28 @@
-import { CuentaIdValueObject, FueEntregadaValueObject, PagoFueRecibidoValueObject, VueltoFueEntregadoValueObject } from "../value-objects/mesero/cuenta";
-import { ICuentaDomainEntity } from "./interfaces";
-
 import { v4 as uuid } from 'uuid';
 
+import { GuarnicionValueObject, PlatoPrincipalIdValueObject, NombreValueObject } from '../../value-objects/pedido/plato-principal';
+import { IPlatoPrincipalDomainEntity } from '../interfaces/pedido';
+
 /**
- *Clase base de entidad Cuenta
+ *Clase base de entidad Plato principal
  *
  * @export
- * @class CuentaDomainEntityBase
- * @implements {ICuentaDomainEntity}
+ * @class PlatoPrincipalDomainEntityBase
+ * @implements {IEntradaDomainEntity}
  */
-export class CuentaDomainEntityBase implements ICuentaDomainEntity {
-    cuentaId?: string | CuentaIdValueObject;
-    pagoFueRecibido?: boolean | PagoFueRecibidoValueObject;
-    vueltoFueEntregado?: boolean | VueltoFueEntregadoValueObject;
-    cuentaFueEntregada?: boolean | FueEntregadaValueObject;
+export class PlatoPrincipalDomainEntityBase implements IPlatoPrincipalDomainEntity {
+    platoPrincipalId?: string | PlatoPrincipalIdValueObject;
+    nombre?: string | NombreValueObject;
+    guarnicion?: string | GuarnicionValueObject;
     createdAt?: number | Date;
 
-    constructor(_data?: ICuentaDomainEntity) {
-        if(_data.cuentaId) this.cuentaId = _data.cuentaId;
-        else this.cuentaId = uuid();
+    constructor(_data?: IPlatoPrincipalDomainEntity) {
+        if(_data.platoPrincipalId) this.platoPrincipalId = _data.platoPrincipalId;
+        else this.platoPrincipalId = uuid();
 
-        if(_data.pagoFueRecibido) this.pagoFueRecibido = _data.pagoFueRecibido;
+        if(_data.nombre) this.nombre = _data.nombre;
 
-        if(_data.vueltoFueEntregado) this.vueltoFueEntregado = _data.vueltoFueEntregado;
-
-        if(_data.cuentaFueEntregada) this.cuentaFueEntregada = _data.cuentaFueEntregada;
+        if(_data.guarnicion) this.guarnicion = _data.guarnicion;
 
         this.createdAt = new Date();
     }

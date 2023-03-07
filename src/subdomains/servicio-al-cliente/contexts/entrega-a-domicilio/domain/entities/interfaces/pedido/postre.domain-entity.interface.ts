@@ -1,4 +1,4 @@
-import { NombreValueObject, PostreIdValueObject, TamanioValueObject } from '../../../value-objects/pedido/postre';
+import { EsParaVeganosValueObject, NombreValueObject, PostreIdValueObject, TamanioValueObject } from '../../../value-objects/pedido/postre';
 
 /**
  *Interfaz para la entidad Postre
@@ -10,5 +10,6 @@ import { NombreValueObject, PostreIdValueObject, TamanioValueObject } from '../.
     postreId?: string | PostreIdValueObject;
     nombre?: string | NombreValueObject;
     tamanio?: string | TamanioValueObject;
+    esParaVeganos?: boolean | EsParaVeganosValueObject;
     createdAt?: number | Date;
 }
