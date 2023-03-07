@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { ClienteIdValueObject } from './cliente-id.value-object';
+import { ClienteIdValueObject } from '../../cliente';
 
 
 const validos = [undefined, '6650e6dd-b7cc-4426-af2c-0bb2730337e1', uuid()];
