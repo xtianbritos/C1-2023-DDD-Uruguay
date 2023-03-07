@@ -1,9 +1,9 @@
-import { EsBoolean } from '../../../../../../../../libs/validations';
-import { ValueObjectBase } from '../../../../../../../../libs/sofka/bases';
-import { IErrorValueObject } from '../../../../../../../../libs/sofka/interface';
+import { EsBoolean } from '../../../../../../../../../libs/validations';
+import { ValueObjectBase } from '../../../../../../../../../libs/sofka/bases';
+import { IErrorValueObject } from '../../../../../../../../../libs/sofka/interface';
 
 
-export class EstaDisponibleValueObject extends ValueObjectBase<boolean> {
+export class EsParaVeganosValueObject extends ValueObjectBase<boolean> {
 
     constructor(value: boolean) {
         super(value);
@@ -12,7 +12,7 @@ export class EstaDisponibleValueObject extends ValueObjectBase<boolean> {
     /**
      *Funsión que realiza todas las validaciones
      *
-     * @memberof EstaDisponibleValueObject
+     * @memberof EsParaVeganosValueObject
      */
     validateData(): void {
         this.validarBoolean();
@@ -22,13 +22,13 @@ export class EstaDisponibleValueObject extends ValueObjectBase<boolean> {
      *Funsión que valida un dato sea booleano
      *
      * @private
-     * @memberof EstaDisponibleValueObject
+     * @memberof EsParaVeganosValueObject
      */
     private validarBoolean(): void {
         if(EsBoolean(this.value) === false) {
 
             const error: IErrorValueObject = {
-                field: 'EstaDisponible',
+                field: 'EsParaVeganos',
                 message: 'El valor no es un booleano'
             };
 

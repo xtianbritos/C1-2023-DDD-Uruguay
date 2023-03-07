@@ -1,3 +1,4 @@
-export * from './cliente-id';
-export * from './direccion';
+export * from './es-para-veganos';
 export * from './nombre';
+export * from './postre-id';
+export * from './tamanio';

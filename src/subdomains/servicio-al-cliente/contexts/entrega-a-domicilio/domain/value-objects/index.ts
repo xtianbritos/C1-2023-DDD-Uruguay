@@ -1,2 +1,2 @@
-export * from './cocinero';
+export * from './pedido';
 export * from './ticket';
