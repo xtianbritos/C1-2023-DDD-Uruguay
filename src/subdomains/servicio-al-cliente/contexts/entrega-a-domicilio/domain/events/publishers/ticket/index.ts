@@ -1,5 +1,5 @@
 export * from './cliente-creado.event-publisher';
-
+export * from './direccion-cliente-cambiada.event-publisher';
 
 
 
