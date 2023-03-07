@@ -1,8 +1,15 @@
 import { IClienteDomainService, IRepartidorDomainService, ITicketDomainService } from "../services";
-import { TicketCreadoEventPublisherBase } from '../events/publishers/ticket/ticket-creado.event-publisher';
+import { TicketCreadoEventPublisherBase } from '../events/publishers/ticket';
 import { ClienteDomainEntityBase, RepartidorDomainEntityBase, TicketDomainEntityBase } from "../entities";
 import { AggregateRootException } from '../../../../../../libs/sofka/exceptions/aggregate-root.exception';
-import { ClienteCreadoEventPublisherBase, RepartidorCreadoEventPublisherBase, DireccionClienteCambiadaEventPublisherBase } from "../events/publishers/ticket";
+import {
+    VehiculoRepartidorCambiadoEventPublisherBase,
+    NombreRepartidorCambiadoEventPublisherBase,
+    NombreClienteCambiadoEventPublisherBase,
+    ClienteCreadoEventPublisherBase,
+    RepartidorCreadoEventPublisherBase,
+    DireccionClienteCambiadaEventPublisherBase
+} from "../events/publishers/ticket";
 
 export class TicketAggregate
     implements ITicketDomainService {
@@ -14,6 +21,9 @@ export class TicketAggregate
         private readonly clienteCreadoEventPublisherBase?: ClienteCreadoEventPublisherBase;
         private readonly repartidorCreadoEventPublisherBase?: RepartidorCreadoEventPublisherBase;
         private readonly direccionClienteCambiadaEventPublisherBase?: DireccionClienteCambiadaEventPublisherBase;
+        private readonly nombreClienteCambiadoEventPublisherBase?: NombreClienteCambiadoEventPublisherBase;
+        private readonly nombreRepartidorCambiadoEventPublisherBase?: NombreRepartidorCambiadoEventPublisherBase;
+        private readonly vehiculoRepartidorCambiadoEventPublisherBase?: VehiculoRepartidorCambiadoEventPublisherBase;
 
         constructor(
             {
@@ -24,6 +34,9 @@ export class TicketAggregate
                 clienteCreadoEventPublisherBase,
                 repartidorCreadoEventPublisherBase,
                 direccionClienteCambiadaEventPublisherBase,
+                nombreClienteCambiadoEventPublisherBase,
+                nombreRepartidorCambiadoEventPublisherBase,
+                vehiculoRepartidorCambiadoEventPublisherBase,
             }: {
                 ticketService?: ITicketDomainService<TicketDomainEntityBase>,
                 clienteService?: IClienteDomainService<ClienteDomainEntityBase>,
@@ -32,6 +45,9 @@ export class TicketAggregate
                 clienteCreadoEventPublisherBase?: ClienteCreadoEventPublisherBase,
                 repartidorCreadoEventPublisherBase?: RepartidorCreadoEventPublisherBase,
                 direccionClienteCambiadaEventPublisherBase?: DireccionClienteCambiadaEventPublisherBase,
+                nombreClienteCambiadoEventPublisherBase?: NombreClienteCambiadoEventPublisherBase,
+                nombreRepartidorCambiadoEventPublisherBase?: NombreRepartidorCambiadoEventPublisherBase,
+                vehiculoRepartidorCambiadoEventPublisherBase?: VehiculoRepartidorCambiadoEventPublisherBase,
             }
         ) {
             this.ticketService = ticketService,
@@ -41,6 +57,9 @@ export class TicketAggregate
             this.clienteCreadoEventPublisherBase = clienteCreadoEventPublisherBase,
             this.repartidorCreadoEventPublisherBase = repartidorCreadoEventPublisherBase,
             this.direccionClienteCambiadaEventPublisherBase = direccionClienteCambiadaEventPublisherBase,
+            this.nombreClienteCambiadoEventPublisherBase = nombreClienteCambiadoEventPublisherBase,
+            this.nombreRepartidorCambiadoEventPublisherBase = nombreRepartidorCambiadoEventPublisherBase,
+            this.vehiculoRepartidorCambiadoEventPublisherBase = vehiculoRepartidorCambiadoEventPublisherBase,
         }
 
         async crearTicket(ticket: TicketDomainEntityBase): Promise<TicketDomainEntityBase> {
@@ -75,8 +94,16 @@ export class TicketAggregate
             )
         }
 
-        cambiarNombreCliente(clienteId: string, nuevoNombre: string): Promise<string> {
-            throw new Error('Method not implemented.');
+        async cambiarNombreCliente(clienteId: string, nuevoNombre: string): Promise<string> {
+            if(this.clienteService && this.nombreClienteCambiadoEventPublisherBase) {
+                const result = await this.clienteService.cambiarNombre(clienteId, nuevoNombre);
+                this.nombreClienteCambiadoEventPublisherBase.response = result;
+                this.nombreClienteCambiadoEventPublisherBase.publish();
+                return this.nombreClienteCambiadoEventPublisherBase.response;
+            }
+            throw new AggregateRootException(
+                'TicketAggregate "ClienteService" y/o "nombreClienteCambiadoEventPublisherBase" no están definidos'
+            )
         }
 
         async cambiarDireccionCliente(clienteId: string, nuevaDireccion: string): Promise<string> {
@@ -103,12 +130,28 @@ export class TicketAggregate
             )
         }
 
-        cambiarNombreRepartidor(repartidorId: string, nuevoNombre: string): Promise<string> {
-            throw new Error('Method not implemented.');
+        async cambiarNombreRepartidor(repartidorId: string, nuevoNombre: string): Promise<string> {
+            if(this.repartidorService && this.nombreRepartidorCambiadoEventPublisherBase) {
+                const result = await this.repartidorService.cambiarNombre(repartidorId, nuevoNombre);
+                this.nombreRepartidorCambiadoEventPublisherBase.response = result;
+                this.nombreRepartidorCambiadoEventPublisherBase.publish();
+                return this.nombreRepartidorCambiadoEventPublisherBase.response;
+            }
+            throw new AggregateRootException(
+                'TicketAggregate "repartidorService" y/o "nombreRepartidorCambiadoEventPublisherBase" no están definidos'
+            )
         }
 
-        cambiarVehiculoRepartidor(repartidorId: string, nuevoVehiculo: string): Promise<string> {
-            throw new Error('Method not implemented.');
+        async cambiarVehiculoRepartidor(repartidorId: string, nuevoVehiculo: string): Promise<string> {
+            if(this.repartidorService && this.vehiculoRepartidorCambiadoEventPublisherBase) {
+                const result = await this.repartidorService.cambiarVehiculo(repartidorId, nuevoVehiculo);
+                this.vehiculoRepartidorCambiadoEventPublisherBase.response = result;
+                this.vehiculoRepartidorCambiadoEventPublisherBase.publish();
+                return this.vehiculoRepartidorCambiadoEventPublisherBase.response;
+            }
+            throw new AggregateRootException(
+                'TicketAggregate "repartidorService" y/o "vehiculoRepartidorCambiadoEventPublisherBase" no están definidos'
+            )
         }
         
     }
