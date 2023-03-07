@@ -1,4 +1,4 @@
-import { IClienteDomainEntity, IRepartidorDomainEntity } from '../../../entities/interfaces';
+import { IClienteDomainEntity, IPedidoDomainEntity, IRepartidorDomainEntity } from '../../../entities/interfaces';
 
 /**
  *Interfaz para el comando Crear Ticket

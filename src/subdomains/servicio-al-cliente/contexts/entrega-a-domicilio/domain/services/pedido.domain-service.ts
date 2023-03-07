@@ -1,3 +1,9 @@
+import {
+    BebidaDomainEntityBase,
+    EntradaDomainEntityBase,
+    PlatoPrincipalDomainEntityBase,
+    PostreDomainEntityBase
+} from "../entities/pedido";
 
 /**
  *Servicio para los comandos del agregado Pedido
