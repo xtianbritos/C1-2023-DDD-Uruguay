@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
 
 import {TicketIdValueObject } from '../../value-objects';
-import { IClienteDomainEntity, IRepartidorDomainEntity, ITicketDomainEntity } from "../interfaces";
+import { IPedidoDomainEntity } from '../interfaces/pedido';
+import { IClienteDomainEntity, IRepartidorDomainEntity, ITicketDomainEntity } from "../interfaces/ticket";
 
 /**
  *Clase base de entidad Ticket

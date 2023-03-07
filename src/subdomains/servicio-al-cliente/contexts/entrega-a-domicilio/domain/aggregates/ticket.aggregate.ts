@@ -1,6 +1,6 @@
 import { IClienteDomainService, IRepartidorDomainService, ITicketDomainService } from "../services";
 import { TicketCreadoEventPublisherBase } from '../events/publishers/ticket';
-import { ClienteDomainEntityBase, RepartidorDomainEntityBase, TicketDomainEntityBase } from "../entities";
+import { ClienteDomainEntityBase, PedidoDomainEntityBase, RepartidorDomainEntityBase, TicketDomainEntityBase } from "../entities";
 import { AggregateRootException } from '../../../../../../libs/sofka/exceptions/aggregate-root.exception';
 import {
     VehiculoRepartidorCambiadoEventPublisherBase,
@@ -14,7 +14,7 @@ import {
 } from "../events/publishers/ticket";
 
 export class TicketAggregate
-    implements ITicketDomainService {
+    implements ITicketDomainService<TicketDomainEntityBase> {
 
         private readonly ticketService?: ITicketDomainService<TicketDomainEntityBase>;
         private readonly clienteService?: IClienteDomainService<ClienteDomainEntityBase>;

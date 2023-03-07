@@ -1,32 +1,14 @@
-import { CuentaIdValueObject, FueEntregadaValueObject, PagoFueRecibidoValueObject, VueltoFueEntregadoValueObject } from "../value-objects/mesero/cuenta";
-import { ICuentaDomainEntity } from "./interfaces";
-
-import { v4 as uuid } from 'uuid';
+import { PlatoPrincipalIdValueObject, NombreValueObject, GuarnicionValueObject } from '../../../value-objects/pedido/plato-principal';
 
 /**
- *Clase base de entidad Cuenta
+ *Interfaz para la entidad Plato principal
  *
  * @export
- * @class CuentaDomainEntityBase
- * @implements {ICuentaDomainEntity}
+ * @class IPlatoPrincipalDomainEntity
  */
-export class CuentaDomainEntityBase implements ICuentaDomainEntity {
-    cuentaId?: string | CuentaIdValueObject;
-    pagoFueRecibido?: boolean | PagoFueRecibidoValueObject;
-    vueltoFueEntregado?: boolean | VueltoFueEntregadoValueObject;
-    cuentaFueEntregada?: boolean | FueEntregadaValueObject;
+ export interface IPlatoPrincipalDomainEntity {
+    platoPrincipalId?: string | PlatoPrincipalIdValueObject;
+    nombre?: string | NombreValueObject;
+    guarnicion?: string | GuarnicionValueObject;
     createdAt?: number | Date;
-
-    constructor(_data?: ICuentaDomainEntity) {
-        if(_data.cuentaId) this.cuentaId = _data.cuentaId;
-        else this.cuentaId = uuid();
-
-        if(_data.pagoFueRecibido) this.pagoFueRecibido = _data.pagoFueRecibido;
-
-        if(_data.vueltoFueEntregado) this.vueltoFueEntregado = _data.vueltoFueEntregado;
-
-        if(_data.cuentaFueEntregada) this.cuentaFueEntregada = _data.cuentaFueEntregada;
-
-        this.createdAt = new Date();
-    }
 }

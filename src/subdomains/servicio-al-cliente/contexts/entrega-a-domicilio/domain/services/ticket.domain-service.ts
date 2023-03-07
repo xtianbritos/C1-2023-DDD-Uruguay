@@ -1,3 +1,4 @@
+import { PedidoDomainEntityBase } from "../entities/pedido";
 import { ClienteDomainEntityBase, RepartidorDomainEntityBase, TicketDomainEntityBase } from "../entities/ticket";
 
 /**
