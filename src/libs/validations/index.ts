@@ -8,5 +8,6 @@ export * from './es-string-alfabetico.validations';
 export * from './es-tamaño-valido.validations';
 export * from './es-uuid.validations';
 export * from './es-vehiculo.validations';
+export * from './is-empty.validations';
 export * from './longitud-maxima.validations';
 export * from './longitud-minima.validations';
