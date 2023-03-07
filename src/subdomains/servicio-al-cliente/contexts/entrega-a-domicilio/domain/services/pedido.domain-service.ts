@@ -26,6 +26,6 @@ export interface IPedidoDomainService<PedidoAggregate> {
     cambiarTamañoBebida(bebidaId: string, nuevoTamaño: string): Promise<string>;
     crearPostre(postre: PostreDomainEntityBase): Promise<PostreDomainEntityBase>;
     cambiarNombrePostre(postreId: string, nuevoNombre: string): Promise<string>;
-    cambiarTamañoPostre(posteId: string, nuevoTamaño: string): Promise<string>;
-    cambiarPostreEsPAraVeganos(posteId: string, nuevoEstado: boolean): Promise<boolean>;
+    cambiarTamañoPostre(postreId: string, nuevoTamaño: string): Promise<string>;
+    cambiarPostreEsPAraVeganos(postreId: string, nuevoEstado: boolean): Promise<boolean>;
 }

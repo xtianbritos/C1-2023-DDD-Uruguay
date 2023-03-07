@@ -9,6 +9,6 @@
 export interface IPostreDomainService<PostreDomainEntityBase> {
     crearPostre(postre: PostreDomainEntityBase): Promise<PostreDomainEntityBase>;
     cambiarNombre(postreId: string, nuevoNombre: string): Promise<string>;
-    cambiarTamaño(posteId: string, nuevoTamaño: string): Promise<string>;
-    cambiarEsPAraVeganos(posteId: string, nuevoEstado: boolean): Promise<boolean>;
+    cambiarTamaño(postreId: string, nuevoTamaño: string): Promise<string>;
+    cambiarEsParaVeganos(postreId: string, nuevoEstado: boolean): Promise<boolean>;
 }

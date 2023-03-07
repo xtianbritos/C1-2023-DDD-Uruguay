@@ -1,7 +1,7 @@
 
 import { EventPublisherBase } from "src/libs";
 
-export abstract class NombrePlatoCambiadoEventPublisherBase<
+export abstract class NombrePlatoPrincipalCambiadoEventPublisherBase<
     Response = string
 > extends EventPublisherBase<Response> {
     publish<Result = any>(): Promise<Result> {
