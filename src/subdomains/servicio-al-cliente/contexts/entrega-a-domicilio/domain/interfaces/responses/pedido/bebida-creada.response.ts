@@ -4,9 +4,9 @@ import { BebidaDomainEntityBase } from '../../../entities';
  *Interfaz para la respuesta a Crear Bebida
  *
  * @export
- * @interface IBebidaCreadoResponse
+ * @interface IBebidaCreadaResponse
  */
-export interface IBebidaCreadoResponse {
+export interface IBebidaCreadaResponse {
     success: boolean;
     data: BebidaDomainEntityBase | null;
 }

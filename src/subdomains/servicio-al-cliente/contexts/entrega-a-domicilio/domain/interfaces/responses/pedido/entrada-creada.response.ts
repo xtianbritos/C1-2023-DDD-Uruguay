@@ -4,9 +4,9 @@ import { EntradaDomainEntityBase } from '../../../entities';
  *Interfaz para la respuesta a Crear Entrada
  *
  * @export
- * @interface IEntradaCreadoResponse
+ * @interface IEntradaCreadaResponse
  */
-export interface IEntradaCreadoResponse {
+export interface IEntradaCreadaResponse {
     success: boolean;
     data: EntradaDomainEntityBase | null;
 }
