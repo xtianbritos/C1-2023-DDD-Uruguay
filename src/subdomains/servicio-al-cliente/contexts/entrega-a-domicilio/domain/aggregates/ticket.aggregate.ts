@@ -8,7 +8,9 @@ import {
     NombreClienteCambiadoEventPublisherBase,
     ClienteCreadoEventPublisherBase,
     RepartidorCreadoEventPublisherBase,
-    DireccionClienteCambiadaEventPublisherBase
+    DireccionClienteCambiadaEventPublisherBase,
+    PedidoAgregadoEventPublisherBase,
+    PedidoBorradoEventPublisherBase
 } from "../events/publishers/ticket";
 
 export class TicketAggregate
@@ -24,6 +26,8 @@ export class TicketAggregate
         private readonly nombreClienteCambiadoEventPublisherBase?: NombreClienteCambiadoEventPublisherBase;
         private readonly nombreRepartidorCambiadoEventPublisherBase?: NombreRepartidorCambiadoEventPublisherBase;
         private readonly vehiculoRepartidorCambiadoEventPublisherBase?: VehiculoRepartidorCambiadoEventPublisherBase;
+        private readonly pedidoAgregadoEventPublisherBase?: PedidoAgregadoEventPublisherBase;
+        private readonly pedidoBorradoEventPublisherBase?: PedidoBorradoEventPublisherBase;
 
         constructor(
             {
@@ -37,6 +41,8 @@ export class TicketAggregate
                 nombreClienteCambiadoEventPublisherBase,
                 nombreRepartidorCambiadoEventPublisherBase,
                 vehiculoRepartidorCambiadoEventPublisherBase,
+                pedidoAgregadoEventPublisherBase,
+                pedidoBorradoEventPublisherBase
             }: {
                 ticketService?: ITicketDomainService<TicketDomainEntityBase>,
                 clienteService?: IClienteDomainService<ClienteDomainEntityBase>,
@@ -48,6 +54,8 @@ export class TicketAggregate
                 nombreClienteCambiadoEventPublisherBase?: NombreClienteCambiadoEventPublisherBase,
                 nombreRepartidorCambiadoEventPublisherBase?: NombreRepartidorCambiadoEventPublisherBase,
                 vehiculoRepartidorCambiadoEventPublisherBase?: VehiculoRepartidorCambiadoEventPublisherBase,
+                pedidoAgregadoEventPublisherBase?: PedidoAgregadoEventPublisherBase;
+                pedidoBorradoEventPublisherBase?: PedidoBorradoEventPublisherBase;
             }
         ) {
             this.ticketService = ticketService,
@@ -60,6 +68,8 @@ export class TicketAggregate
             this.nombreClienteCambiadoEventPublisherBase = nombreClienteCambiadoEventPublisherBase,
             this.nombreRepartidorCambiadoEventPublisherBase = nombreRepartidorCambiadoEventPublisherBase,
             this.vehiculoRepartidorCambiadoEventPublisherBase = vehiculoRepartidorCambiadoEventPublisherBase,
+            this.pedidoAgregadoEventPublisherBase = pedidoAgregadoEventPublisherBase,
+            this.pedidoBorradoEventPublisherBase = pedidoBorradoEventPublisherBase
         }
 
         async crearTicket(ticket: TicketDomainEntityBase): Promise<TicketDomainEntityBase> {
@@ -74,12 +84,28 @@ export class TicketAggregate
             )
         }
 
-        agregarPedido(ticketId: string, pedidoId: string): Promise<PedidoDomainEntityBase> {
-            throw new Error('Method not implemented.');
+        async agregarPedido(ticketId: string, pedidoId: string): Promise<PedidoDomainEntityBase> {
+            if(this.ticketService && this.pedidoAgregadoEventPublisherBase) {
+                const result = await this.ticketService.agregarPedido(ticketId, pedidoId);
+                this.pedidoAgregadoEventPublisherBase.response = result;
+                this.pedidoAgregadoEventPublisherBase.publish();
+                return this.pedidoAgregadoEventPublisherBase.response;
+            }
+            throw new AggregateRootException(
+                'TicketAggregate "TicketService" y/o "pedidoAgregadoEventPublisherBase" no están definidos'
+            )
         }
 
-        borrarPedido(tiketId: string, pedidoId: string): Promise<PedidoDomainEntityBase> {
-            throw new Error('Method not implemented.');
+        async borrarPedido(ticketId: string, pedidoId: string): Promise<void> {
+            if(this.ticketService && this.pedidoBorradoEventPublisherBase) {
+                const result = await this.ticketService.borrarPedido(ticketId, pedidoId);
+                this.pedidoBorradoEventPublisherBase.response = result;
+                this.pedidoBorradoEventPublisherBase.publish();
+                return this.pedidoBorradoEventPublisherBase.response;
+            }
+            throw new AggregateRootException(
+                'TicketAggregate "TicketService" y/o "pedidoBorradoEventPublisherBase" no están definidos'
+            )
         }
 
         async crearCliente(cliente: ClienteDomainEntityBase): Promise<ClienteDomainEntityBase> {
