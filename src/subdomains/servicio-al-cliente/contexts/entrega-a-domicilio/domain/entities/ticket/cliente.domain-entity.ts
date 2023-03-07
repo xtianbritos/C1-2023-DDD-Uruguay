@@ -1,31 +1,28 @@
-import { CuentaIdValueObject, FueEntregadaValueObject, PagoFueRecibidoValueObject, VueltoFueEntregadoValueObject } from "../value-objects/mesero/cuenta";
-import { ICuentaDomainEntity } from "./interfaces";
-
 import { v4 as uuid } from 'uuid';
 
+import { ClienteIdValueObject, DireccionValueObject, NombreValueObject } from '../../value-objects/ticket/cliente';
+import { IClienteDomainEntity } from "../interfaces/ticket";
+
 /**
- *Clase base de entidad Cuenta
+ *Clase base de entidad Cliente
  *
  * @export
- * @class CuentaDomainEntityBase
- * @implements {ICuentaDomainEntity}
+ * @class ClienteDomainEntityBase
+ * @implements {IClienteDomainEntity}
  */
-export class CuentaDomainEntityBase implements ICuentaDomainEntity {
-    cuentaId?: string | CuentaIdValueObject;
-    pagoFueRecibido?: boolean | PagoFueRecibidoValueObject;
-    vueltoFueEntregado?: boolean | VueltoFueEntregadoValueObject;
-    cuentaFueEntregada?: boolean | FueEntregadaValueObject;
+export class ClienteDomainEntityBase implements IClienteDomainEntity {
+    clienteId?: string | ClienteIdValueObject;
+    nombre?: string | NombreValueObject;
+    direccion?: string | DireccionValueObject;
     createdAt?: number | Date;
 
-    constructor(_data?: ICuentaDomainEntity) {
-        if(_data.cuentaId) this.cuentaId = _data.cuentaId;
-        else this.cuentaId = uuid();
+    constructor(_data?: IClienteDomainEntity) {
+        if(_data.clienteId) this.clienteId = _data.clienteId;
+        else this.clienteId = uuid();
 
-        if(_data.pagoFueRecibido) this.pagoFueRecibido = _data.pagoFueRecibido;
+        if(_data.nombre) this.nombre = _data.nombre;
 
-        if(_data.vueltoFueEntregado) this.vueltoFueEntregado = _data.vueltoFueEntregado;
-
-        if(_data.cuentaFueEntregada) this.cuentaFueEntregada = _data.cuentaFueEntregada;
+        if(_data.direccion) this.direccion = _data.direccion;
 
         this.createdAt = new Date();
     }

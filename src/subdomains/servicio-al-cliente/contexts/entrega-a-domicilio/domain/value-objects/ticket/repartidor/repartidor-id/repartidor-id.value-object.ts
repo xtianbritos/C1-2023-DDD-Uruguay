@@ -5,7 +5,7 @@ import { ValueObjectBase } from '../../../../../../../../../libs/sofka/bases';
 import { IErrorValueObject } from '../../../../../../../../../libs/sofka/interface';
 
 
-export class ClienteIdValueObject extends ValueObjectBase<string> {
+export class RepartidorIdValueObject extends ValueObjectBase<string> {
 
     constructor(value?: string) {
         super(value ? value : uuid());
@@ -14,7 +14,7 @@ export class ClienteIdValueObject extends ValueObjectBase<string> {
     /**
      *Funsión que realiza todas las validaciones
      *
-     * @memberof ClienteIdValueObject
+     * @memberof RepartidorIdValueObject
      */
     validateData(): void {
         this.validateStructure();
@@ -24,13 +24,13 @@ export class ClienteIdValueObject extends ValueObjectBase<string> {
      *Funsión que valida la estructura de un uuid v4
      *
      * @private
-     * @memberof ClienteIdValueObject
+     * @memberof RepartidorIdValueObject
      */
     private validateStructure(): void {
         if(this.value && EsUuid(this.value) === false) {
 
             const error: IErrorValueObject = {
-                field: 'ClienteId',
+                field: 'RepartidorId',
                 message: 'El id no tiene una estructura válida UUIDV4'
             };
 

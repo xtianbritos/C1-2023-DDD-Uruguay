@@ -1,31 +1,28 @@
-import { CuentaIdValueObject, FueEntregadaValueObject, PagoFueRecibidoValueObject, VueltoFueEntregadoValueObject } from "../value-objects/mesero/cuenta";
-import { ICuentaDomainEntity } from "./interfaces";
-
 import { v4 as uuid } from 'uuid';
 
+import { NombreValueObject, RepartidorIdValueObject, VehiculoValueObject } from '../../value-objects/ticket/repartidor';
+import { IRepartidorDomainEntity } from '../interfaces/ticket';
+
 /**
- *Clase base de entidad Cuenta
+ *Clase base de entidad Repartidor
  *
  * @export
- * @class CuentaDomainEntityBase
- * @implements {ICuentaDomainEntity}
+ * @class RepartidorDomainEntityBase
+ * @implements {IRepartidorDomainEntity}
  */
-export class CuentaDomainEntityBase implements ICuentaDomainEntity {
-    cuentaId?: string | CuentaIdValueObject;
-    pagoFueRecibido?: boolean | PagoFueRecibidoValueObject;
-    vueltoFueEntregado?: boolean | VueltoFueEntregadoValueObject;
-    cuentaFueEntregada?: boolean | FueEntregadaValueObject;
+export class RepartidorDomainEntityBase implements IRepartidorDomainEntity {
+    repartidrId?: string | RepartidorIdValueObject;
+    nombre?: string | NombreValueObject;
+    vehiculo?: string | VehiculoValueObject;
     createdAt?: number | Date;
 
-    constructor(_data?: ICuentaDomainEntity) {
-        if(_data.cuentaId) this.cuentaId = _data.cuentaId;
-        else this.cuentaId = uuid();
+    constructor(_data?: IRepartidorDomainEntity) {
+        if(_data.repartidrId) this.repartidrId = _data.repartidrId;
+        else this.repartidrId = uuid();
 
-        if(_data.pagoFueRecibido) this.pagoFueRecibido = _data.pagoFueRecibido;
+        if(_data.nombre) this.nombre = _data.nombre;
 
-        if(_data.vueltoFueEntregado) this.vueltoFueEntregado = _data.vueltoFueEntregado;
-
-        if(_data.cuentaFueEntregada) this.cuentaFueEntregada = _data.cuentaFueEntregada;
+        if(_data.vehiculo) this.vehiculo = _data.vehiculo;
 
         this.createdAt = new Date();
     }
