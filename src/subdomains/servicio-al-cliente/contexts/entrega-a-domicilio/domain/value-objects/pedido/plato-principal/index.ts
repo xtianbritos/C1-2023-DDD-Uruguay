@@ -1,3 +1,3 @@
-export * from './cliente-id';
-export * from './direccion';
+export * from './plato-principal-id';
+export * from './guarnicion';
 export * from './nombre';
