@@ -1,6 +1,6 @@
 import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/libs/sofka";
 import { PedidoAggregate } from "../../../domain/aggregates";
-import { IBebidaDomainEntity } from "../../../domain/entities/interfaces/pedido";
+import { IPedidoDomainEntity } from "../../../domain/entities/interfaces/pedido";
 import {
     BebidaDomainEntityBase,
     EntradaDomainEntityBase,
@@ -8,25 +8,18 @@ import {
     PlatoPrincipalDomainEntityBase,
     PostreDomainEntityBase
 } from "../../../domain/entities/pedido";
+
 import {
     BebidaCreadaEventPublisherBase, 
     EntradaCreadaEventPublisherBase,
-    EstadoPedidoCambiadoEventPublisherBase,
-    GuarnicionPlatoPrincipalCambiadoEventPublisherBase,
-    NombreBebidaCambiadoEventPublisherBase,
-    NombreEntradaCambiadoEventPublisherBase,
-    NombrePlatoPrincipalCambiadoEventPublisherBase,
-    NombrePostreCambiadoEventPublisherBase,
     PedidoCreadoEventPublisherBase,
     PlatoPrincipalCreadoEventPublisherBase,
     PostreCreadoEventPublisherBase,
-    PostreEsParaVeganosCambiadoEventPublisherBase,
-    PrecioPedidoCambiadoEventPublisherBase,
-    TamanioBebidaCambiadoEventPublisherBase,
-    TamanioPostreCambiadoEventPublisherBase
+    PedidoObtenidoEventPublisherBase
 } from "../../../domain/events/publishers/pedido";
-import { ICrearBebidaCommand } from "../../../domain/interfaces/commands/pedido";
-import { IBebidaCreadaResponse, IPedidoCreadoResponse } from "../../../domain/interfaces/responses/pedido";
+
+import { ICrearPedidoCommand } from "../../../domain/interfaces/commands/pedido";
+import { IPedidoCreadoResponse } from "../../../domain/interfaces/responses/pedido";
 import {
     IBebidaDomainService,
     IEntradaDomainService,
@@ -34,12 +27,20 @@ import {
     IPlatoPrincipalDomainService,
     IPostreDomainService
 } from "../../../domain/services";
-import { NombreValueObject, TamanioValueObject } from "../../../domain/value-objects/pedido/bebida";
+
+import {
+    EsParaVeganosValueObject,
+    EstadoValueObject,
+    GuarnicionValueObject,
+    PrecioValueObject,
+    TamanioValueObject,
+    NombreValueObject
+} from "../../../domain/value-objects/pedido";
 
 
-// export class CrearBebidaUseCase<
-    Command extends ICrearBebidaCommand = ICrearBebidaCommand,
-    Response extends IBebidaCreadaResponse = IBebidaCreadaResponse
+export class CrearPedidoUseCase<
+    Command extends ICrearPedidoCommand = ICrearPedidoCommand,
+    Response extends IPedidoCreadoResponse = IPedidoCreadoResponse
 >
     extends ValueObjectErrorHandler
     implements IUseCase<Command, Response>
@@ -48,44 +49,31 @@ import { NombreValueObject, TamanioValueObject } from "../../../domain/value-obj
     private readonly pedidoAggregateRoot: PedidoAggregate;
 
     constructor(
-        // private readonly pedidoService: IPedidoDomainService<PedidoDomainEntityBase>,
-        // private readonly entradaService?: IEntradaDomainService<EntradaDomainEntityBase>,
-        // private readonly platoPrincipalService?: IPlatoPrincipalDomainService<PlatoPrincipalDomainEntityBase>,
-        // private readonly postreService?: IPostreDomainService<PostreDomainEntityBase>,
-        // private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
-        // private readonly pedidoCreadoEventPublisherBase?: PedidoCreadoEventPublisherBase,
-        // private readonly entradaCreadaEventPublisherBase?: EntradaCreadaEventPublisherBase,
-        // private readonly platoPrincipalCreadoEventPublisherBase?: PlatoPrincipalCreadoEventPublisherBase,
-        // private readonly postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase,
-        // private readonly bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase,
-        // private readonly estadoPedidoCambiadoEventPublisherBase?: EstadoPedidoCambiadoEventPublisherBase,
-        // private readonly precioPedidoCambiadoEventPublisherBase?: PrecioPedidoCambiadoEventPublisherBase,
-        // private readonly nombreEntradaCambiadoEventPublisherBase?: NombreEntradaCambiadoEventPublisherBase,
-        // private readonly nombrePlatoPrincipalCambiadoEventPublisherBase?: NombrePlatoPrincipalCambiadoEventPublisherBase,
-        // private readonly guarnicionPlatoPrincipalCambiadoEventPublisherBase?: GuarnicionPlatoPrincipalCambiadoEventPublisherBase,
-        // private readonly nombrePostreCambiadoEventPublisherBase?: NombrePostreCambiadoEventPublisherBase,
-        // private readonly nombreBebidaCambiadoEventPublisherBase?: NombreBebidaCambiadoEventPublisherBase,
-        // private readonly tamanioBebidaCambiadoEventPublisherBase?: TamanioBebidaCambiadoEventPublisherBase,
-        // private readonly tamanioPostreCambiadoEventPublisherBase?: TamanioPostreCambiadoEventPublisherBase,
-        // private readonly postreEsParaVeganosCambiadoEventPublisherBase?: PostreEsParaVeganosCambiadoEventPublisherBase,
+        private readonly pedidoService: IPedidoDomainService<PedidoDomainEntityBase>,
+        private readonly entradaService?: IEntradaDomainService<EntradaDomainEntityBase>,
+        private readonly platoPrincipalService?: IPlatoPrincipalDomainService<PlatoPrincipalDomainEntityBase>,
+        private readonly postreService?: IPostreDomainService<PostreDomainEntityBase>,
+        private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
+        private readonly pedidoCreadoEventPublisherBase?: PedidoCreadoEventPublisherBase,
+        private readonly entradaCreadaEventPublisherBase?: EntradaCreadaEventPublisherBase,
+        private readonly platoPrincipalCreadoEventPublisherBase?: PlatoPrincipalCreadoEventPublisherBase,
+        private readonly postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase,
+        private readonly bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase,
+        private readonly pedidoObtenidoEventPublisherBase?: PedidoObtenidoEventPublisherBase
     ) {
         super();
         this.pedidoAggregateRoot = new PedidoAggregate({
-            // pedidoService,
-            // entradaService,
-            // platoPrincipalService,
-            // pedidoCreadoEventPublisherBase,
-            // entradaCreadaEventPublisherBase,
-            // platoPrincipalCreadoEventPublisherBase,
-            // estadoPedidoCambiadoEventPublisherBase,
-            // precioPedidoCambiadoEventPublisherBase,
-            // nombreEntradaCambiadoEventPublisherBase,
-            // guarnicionPlatoPrincipalCambiadoEventPublisherBase,
-            // nombrePostreCambiadoEventPublisherBase,
-            // nombreBebidaCambiadoEventPublisherBase,
-            // tamanioBebidaCambiadoEventPublisherBase,
-            // tamanioPostreCambiadoEventPublisherBase,
-            // postreEsParaVeganosCambiadoEventPublisherBase
+            pedidoService,
+            entradaService,
+            platoPrincipalService,
+            postreService,
+            bebidaService,
+            pedidoCreadoEventPublisherBase,
+            entradaCreadaEventPublisherBase,
+            platoPrincipalCreadoEventPublisherBase,
+            postreCreadoEventPublisherBase,
+            bebidaCreadaEventPublisherBase,
+            pedidoObtenidoEventPublisherBase
         })
     }
 
@@ -98,66 +86,118 @@ import { NombreValueObject, TamanioValueObject } from "../../../domain/value-obj
 
     private async executeCommand(
         command: Command
-    ): Promise<BebidaDomainEntityBase | null> {
-        const ValueObject = this.createValueObject(command);
-        this.validateValueObject(ValueObject);
-        const entity = this.createEntityBebidaDomain(ValueObject);
+    ): Promise<PedidoDomainEntityBase | null> {
+        const ValueObjectAndEntity = this.createValueObjectAndEntity(command);
+        this.validateValueObject(ValueObjectAndEntity);
+        const entity = this.createEntityPedidoDomain(ValueObjectAndEntity);
         return this.exectuePedidoAggregateRoot(entity)
     }
 
-    private createValueObject(
+    private createValueObjectAndEntity(
         command: Command
-    ): IBebidaDomainEntity {
+    ): IPedidoDomainEntity {
 
-        const nombre = new NombreValueObject(command.nombre);
-        const tamanio = new TamanioValueObject(command.tamanio);
+        const estado = new EstadoValueObject(command.estado);
+        const precio = new PrecioValueObject(command.precio);
+        const entrada = new EntradaDomainEntityBase(command.entrada);
+        const platoPrincipal = new PlatoPrincipalDomainEntityBase(command.platoPrincipal);
+        const bebida = new BebidaDomainEntityBase(command.bebida);
+        const postre = new PostreDomainEntityBase(command.postre);
 
         return {
-            nombre,
-            tamanio
+            estado,
+            precio,
+            entrada,
+            platoPrincipal,
+            bebida,
+            postre
         }
     }
 
     private validateValueObject(
-        valueObject: IBebidaDomainEntity
+        valueObject: IPedidoDomainEntity
     ): void {
         const {
-            nombre,
-            tamanio
+            estado,
+            precio,
+            entrada,
+            platoPrincipal,
+            bebida,
+            postre
         } = valueObject
 
-        if (nombre instanceof NombreValueObject && nombre.hasErrors())
-            this.setErrors(nombre.getErrors());
+        if (estado instanceof EstadoValueObject && estado.hasErrors())
+            this.setErrors(estado.getErrors());
 
-        if (tamanio instanceof TamanioValueObject && tamanio.hasErrors())
-            this.setErrors(tamanio.getErrors());
+        if (precio instanceof PrecioValueObject && precio.hasErrors())
+            this.setErrors(precio.getErrors());
+        
+        if (entrada instanceof EntradaDomainEntityBase) {
+            if(entrada.nombre instanceof NombreValueObject && entrada.nombre.hasErrors())
+            this.setErrors(entrada.nombre.getErrors());
+        }
+        
+        if (platoPrincipal instanceof PlatoPrincipalDomainEntityBase) {
+            if(platoPrincipal.nombre instanceof NombreValueObject && platoPrincipal.nombre.hasErrors())
+            this.setErrors(platoPrincipal.nombre.getErrors());
+
+            if(platoPrincipal.guarnicion instanceof GuarnicionValueObject && platoPrincipal.guarnicion.hasErrors())
+            this.setErrors(platoPrincipal.guarnicion.getErrors());
+        }
+
+        if (bebida instanceof BebidaDomainEntityBase) {
+            if(bebida.nombre instanceof NombreValueObject && bebida.nombre.hasErrors())
+            this.setErrors(bebida.nombre.getErrors());
+
+            if(bebida.tamanio instanceof TamanioValueObject && bebida.tamanio.hasErrors())
+            this.setErrors(bebida.tamanio.getErrors());
+        }
+
+        if (postre instanceof PostreDomainEntityBase) {
+            if(postre.nombre instanceof NombreValueObject && postre.nombre.hasErrors())
+            this.setErrors(postre.nombre.getErrors());
+
+            if(postre.tamanio instanceof TamanioValueObject && postre.tamanio.hasErrors())
+            this.setErrors(postre.tamanio.getErrors());
+
+            if(postre.esParaVeganos instanceof EsParaVeganosValueObject && postre.esParaVeganos.hasErrors())
+            this.setErrors(postre.esParaVeganos.getErrors());
+        }
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
-                'Hay algunos errores en el comando ejecutado por CrearBebidaUseCase',
+                'Hay algunos errores en el comando ejecutado por CrearPedidoUseCase',
                 this.getErrors(),
             );
 
     }
 
-    private createEntityBebidaDomain(
-        valueObject: IBebidaDomainEntity
-    ): BebidaDomainEntityBase {
+    private createEntityPedidoDomain(
+        valueObject: IPedidoDomainEntity
+    ): PedidoDomainEntityBase {
 
         const {
-            nombre,
-            tamanio
+            estado,
+            precio,
+            entrada,
+            platoPrincipal,
+            bebida,
+            postre
         } = valueObject
 
-        return new BebidaDomainEntityBase({
-            nombre: nombre.valueOf(),
-            tamanio: tamanio.valueOf()
+        return new PedidoDomainEntityBase({
+            estado: estado.valueOf(),
+            precio: precio.valueOf(),
+            entrada: entrada,
+            platoPrincipal: platoPrincipal,
+            bebida: bebida,
+            postre: postre
         })
     }
 
     private exectuePedidoAggregateRoot(
-        entity: BebidaDomainEntityBase,
-    ): Promise<BebidaDomainEntityBase | null> {
-        return this.pedidoAggregateRoot.crearBebida(entity)
+        entity: PedidoDomainEntityBase,
+    ): Promise<PedidoDomainEntityBase | null> {
+        return this.pedidoAggregateRoot.crearPedido(entity)
     }
 }

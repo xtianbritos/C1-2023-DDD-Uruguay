@@ -18,7 +18,8 @@ import {
     NombreBebidaCambiadoEventPublisherBase,
     TamanioBebidaCambiadoEventPublisherBase,
     TamanioPostreCambiadoEventPublisherBase,
-    PostreEsParaVeganosCambiadoEventPublisherBase
+    PostreEsParaVeganosCambiadoEventPublisherBase,
+    PedidoObtenidoEventPublisherBase
 } from '../events/publishers/pedido';
 
 import {
@@ -52,6 +53,8 @@ export class PedidoAggregate
         private readonly postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase;
         private readonly bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase;
 
+        private readonly pedidoObtenidoEventPublisherBase?: PedidoObtenidoEventPublisherBase;
+
         private readonly estadoPedidoCambiadoEventPublisherBase?: EstadoPedidoCambiadoEventPublisherBase;
         private readonly precioPedidoCambiadoEventPublisherBase?: PrecioPedidoCambiadoEventPublisherBase;
         private readonly nombreEntradaCambiadoEventPublisherBase?: NombreEntradaCambiadoEventPublisherBase;
@@ -77,6 +80,8 @@ export class PedidoAggregate
                 postreCreadoEventPublisherBase,
                 bebidaCreadaEventPublisherBase,
 
+                pedidoObtenidoEventPublisherBase,
+
                 estadoPedidoCambiadoEventPublisherBase,
                 precioPedidoCambiadoEventPublisherBase,
                 nombreEntradaCambiadoEventPublisherBase,
@@ -94,12 +99,13 @@ export class PedidoAggregate
                 postreService?: IPostreDomainService<PostreDomainEntityBase>,
                 bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
 
-
                 pedidoCreadoEventPublisherBase?: PedidoCreadoEventPublisherBase,
                 entradaCreadaEventPublisherBase?: EntradaCreadaEventPublisherBase,
                 platoPrincipalCreadoEventPublisherBase?: PlatoPrincipalCreadoEventPublisherBase,
                 postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase,
                 bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase,
+
+                pedidoObtenidoEventPublisherBase?: PedidoObtenidoEventPublisherBase,
 
                 estadoPedidoCambiadoEventPublisherBase?: EstadoPedidoCambiadoEventPublisherBase,
                 precioPedidoCambiadoEventPublisherBase?: PrecioPedidoCambiadoEventPublisherBase,
@@ -125,6 +131,8 @@ export class PedidoAggregate
             this.postreCreadoEventPublisherBase = postreCreadoEventPublisherBase,
             this.bebidaCreadaEventPublisherBase = bebidaCreadaEventPublisherBase,
 
+            this.pedidoObtenidoEventPublisherBase = pedidoObtenidoEventPublisherBase,
+
             this.estadoPedidoCambiadoEventPublisherBase = estadoPedidoCambiadoEventPublisherBase,
             this.precioPedidoCambiadoEventPublisherBase = precioPedidoCambiadoEventPublisherBase,
             this.nombreEntradaCambiadoEventPublisherBase = nombreEntradaCambiadoEventPublisherBase,
@@ -137,7 +145,7 @@ export class PedidoAggregate
             this.postreEsParaVeganosCambiadoEventPublisherBase = postreEsParaVeganosCambiadoEventPublisherBase
 
         }
-    
+        
         async crearPedido(pedido: PedidoDomainEntityBase): Promise<PedidoDomainEntityBase> {
             if(this.pedidoService && this.pedidoCreadoEventPublisherBase) {
                 const result = await this.pedidoService.crearPedido(pedido);
@@ -147,9 +155,21 @@ export class PedidoAggregate
             }
             throw new AggregateRootException(
                 'PedidoAggregate "PedidoService" y/o "pedidoCreadoEventPublisherBase" no están definidos'
-            )
+                )
         }
-
+            
+        async obtenerPedido(pedidoId: string): Promise<PedidoDomainEntityBase> {
+            if(this.pedidoService && this.pedidoObtenidoEventPublisherBase) {
+                const result = await this.pedidoService.obtenerPedido(pedidoId);
+                this.pedidoObtenidoEventPublisherBase.response = result;
+                this.pedidoObtenidoEventPublisherBase.publish();
+                return this.pedidoObtenidoEventPublisherBase.response;
+            }
+            throw new AggregateRootException(
+                'PedidoAggregate "PedidoService" y/o "pedidoObtenidoEventPublisherBase" no están definidos'
+                )
+        }
+        
         async cambiarEstadoPedido(pedidoId: string, nuevoEstado: string): Promise<string> {
             if(this.pedidoService && this.estadoPedidoCambiadoEventPublisherBase) {
                 const result = await this.pedidoService.cambiarEstadoPedido(pedidoId, nuevoEstado);

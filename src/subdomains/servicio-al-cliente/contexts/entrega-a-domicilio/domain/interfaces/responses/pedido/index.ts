@@ -7,6 +7,7 @@ export * from './nombre-entrada-cambiado.response';
 
 
 export * from './pedido-creado.response';
+export * from './pedido-obtenido.response';
 export * from './plato-principal-creado.response';
 export * from './postre-creado.response';
 
