@@ -45,11 +45,13 @@ export class PedidoAggregate
         private readonly platoPrincipalService?: IPlatoPrincipalDomainService<PlatoPrincipalDomainEntityBase>;
         private readonly postreService?: IPostreDomainService<PostreDomainEntityBase>;
         private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>;
+
         private readonly pedidoCreadoEventPublisherBase?: PedidoCreadoEventPublisherBase;
         private readonly entradaCreadaEventPublisherBase?: EntradaCreadaEventPublisherBase;
         private readonly platoPrincipalCreadoEventPublisherBase?: PlatoPrincipalCreadoEventPublisherBase;
         private readonly postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase;
         private readonly bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase;
+
         private readonly estadoPedidoCambiadoEventPublisherBase?: EstadoPedidoCambiadoEventPublisherBase;
         private readonly precioPedidoCambiadoEventPublisherBase?: PrecioPedidoCambiadoEventPublisherBase;
         private readonly nombreEntradaCambiadoEventPublisherBase?: NombreEntradaCambiadoEventPublisherBase;
@@ -66,12 +68,19 @@ export class PedidoAggregate
                 pedidoService,
                 entradaService,
                 platoPrincipalService,
+                postreService,
+                bebidaService,
+
                 pedidoCreadoEventPublisherBase,
                 entradaCreadaEventPublisherBase,
                 platoPrincipalCreadoEventPublisherBase,
+                postreCreadoEventPublisherBase,
+                bebidaCreadaEventPublisherBase,
+
                 estadoPedidoCambiadoEventPublisherBase,
                 precioPedidoCambiadoEventPublisherBase,
                 nombreEntradaCambiadoEventPublisherBase,
+                nombrePlatoPrincipalCambiadoEventPublisherBase,
                 guarnicionPlatoPrincipalCambiadoEventPublisherBase,
                 nombrePostreCambiadoEventPublisherBase,
                 nombreBebidaCambiadoEventPublisherBase,
@@ -82,12 +91,20 @@ export class PedidoAggregate
                 pedidoService?: IPedidoDomainService<PedidoDomainEntityBase>,
                 entradaService?: IEntradaDomainService<EntradaDomainEntityBase>,
                 platoPrincipalService?: IPlatoPrincipalDomainService<PlatoPrincipalDomainEntityBase>,
+                postreService?: IPostreDomainService<PostreDomainEntityBase>,
+                bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
+
+
                 pedidoCreadoEventPublisherBase?: PedidoCreadoEventPublisherBase,
                 entradaCreadaEventPublisherBase?: EntradaCreadaEventPublisherBase,
                 platoPrincipalCreadoEventPublisherBase?: PlatoPrincipalCreadoEventPublisherBase,
+                postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase,
+                bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase,
+
                 estadoPedidoCambiadoEventPublisherBase?: EstadoPedidoCambiadoEventPublisherBase,
                 precioPedidoCambiadoEventPublisherBase?: PrecioPedidoCambiadoEventPublisherBase,
                 nombreEntradaCambiadoEventPublisherBase?: NombreEntradaCambiadoEventPublisherBase,
+                nombrePlatoPrincipalCambiadoEventPublisherBase?: NombrePlatoPrincipalCambiadoEventPublisherBase,
                 guarnicionPlatoPrincipalCambiadoEventPublisherBase?: GuarnicionPlatoPrincipalCambiadoEventPublisherBase,
                 nombrePostreCambiadoEventPublisherBase?: NombrePostreCambiadoEventPublisherBase,
                 nombreBebidaCambiadoEventPublisherBase?: NombreBebidaCambiadoEventPublisherBase,
@@ -99,12 +116,19 @@ export class PedidoAggregate
             this.pedidoService = pedidoService,
             this.entradaService = entradaService,
             this.platoPrincipalService = platoPrincipalService,
+            this.postreService = postreService,
+            this.bebidaService = bebidaService,
+
             this.pedidoCreadoEventPublisherBase = pedidoCreadoEventPublisherBase,
             this.entradaCreadaEventPublisherBase = entradaCreadaEventPublisherBase,
             this.platoPrincipalCreadoEventPublisherBase = platoPrincipalCreadoEventPublisherBase,
+            this.postreCreadoEventPublisherBase = postreCreadoEventPublisherBase,
+            this.bebidaCreadaEventPublisherBase = bebidaCreadaEventPublisherBase,
+
             this.estadoPedidoCambiadoEventPublisherBase = estadoPedidoCambiadoEventPublisherBase,
             this.precioPedidoCambiadoEventPublisherBase = precioPedidoCambiadoEventPublisherBase,
             this.nombreEntradaCambiadoEventPublisherBase = nombreEntradaCambiadoEventPublisherBase,
+            this.nombrePlatoPrincipalCambiadoEventPublisherBase = nombrePlatoPrincipalCambiadoEventPublisherBase,
             this.guarnicionPlatoPrincipalCambiadoEventPublisherBase = guarnicionPlatoPrincipalCambiadoEventPublisherBase,
             this.nombrePostreCambiadoEventPublisherBase = nombrePostreCambiadoEventPublisherBase,
             this.nombreBebidaCambiadoEventPublisherBase = nombreBebidaCambiadoEventPublisherBase,
