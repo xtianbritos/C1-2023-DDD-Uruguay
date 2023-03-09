@@ -108,6 +108,7 @@ export class CambiarNombreBebidaUseCase<
     private exectuePedidoAggregateRoot(
         entity: BebidaDomainEntityBase
     ): Promise<string | null> {
+        this.pedidoAggregateRoot
         const bebidaId = entity.bebidaId.valueOf();
         const nuevoNombre = entity.bebidaId.valueOf();
         

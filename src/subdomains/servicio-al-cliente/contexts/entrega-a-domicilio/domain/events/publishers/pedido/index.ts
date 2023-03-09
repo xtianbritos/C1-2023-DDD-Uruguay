@@ -1,4 +1,5 @@
 export * from './bebida-creada.event-publisher';
+export * from './bebida-obtenida.event-publisher';
 export * from './entrada-creada.event-publisher';
 export * from './estado-pedido-cambiado.event-publisher';
 export * from './guarnicion-plato-principal-cambiada.event-publisher';

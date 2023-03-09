@@ -13,11 +13,4 @@ import {
  */
 export interface IObtenerPedidoCommand {
     pedidoId?: string;
-    estado?: string;
-    precio?: number;
-    entrada?: IEntradaDomainEntity;
-    platoPrincipal?: IPlatoPrincipalDomainEntity;
-    bebida?: IBebidaDomainEntity;
-    postre?: IPostreDomainEntity;
-    createdAt?: number | Date;
 }
