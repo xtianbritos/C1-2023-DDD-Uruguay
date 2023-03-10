@@ -5,7 +5,7 @@ import { BebidaDomainEntityBase } from "../../../domain/entities/pedido";
 import { ICambiarNombreBebidaCommand } from "../../../domain/interfaces/commands/pedido";
 import { INombreBebidaCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
 import { IBebidaDomainService } from "../../../domain/services";
-import { BebidaIdValueObject, NombreValueObject, TamanioValueObject } from "../../../domain/value-objects/pedido/bebida";
+import { BebidaIdValueObject, NombreValueObject } from "../../../domain/value-objects/pedido/bebida";
 import { NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
 
 
