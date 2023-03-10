@@ -6,7 +6,7 @@ import { ICambiarNombreBebidaCommand } from "../../../domain/interfaces/commands
 import { INombreBebidaCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
 import { IBebidaDomainService } from "../../../domain/services";
 import { BebidaIdValueObject, NombreValueObject } from "../../../domain/value-objects/pedido/bebida";
-import { BebidaObtenidaEventPublisherBase, NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
+import { NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
 
 
 export class CambiarNombreBebidaUseCase<
@@ -21,14 +21,12 @@ export class CambiarNombreBebidaUseCase<
 
     constructor(
         private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
-        private readonly nombreBebidaCambiadoEventPublisherBase?: NombreBebidaCambiadoEventPublisherBase,
-        private readonly bebidaObtenidaEventPublisherBase?: BebidaObtenidaEventPublisherBase,
+        private readonly nombreBebidaCambiadoEventPublisherBase?: NombreBebidaCambiadoEventPublisherBase
     ) {
         super();
         this.pedidoAggregateRoot = new PedidoAggregate({
             bebidaService,
-            nombreBebidaCambiadoEventPublisherBase,
-            bebidaObtenidaEventPublisherBase
+            nombreBebidaCambiadoEventPublisherBase
         })
     }
 
@@ -44,15 +42,13 @@ export class CambiarNombreBebidaUseCase<
     ): Promise<string | null> {
         const valueObject = this.createValueObject(command);
         this.validateValueObject(valueObject);
-        const entity = await this.obtenerEntityBebidaDomain(valueObject);
-        const entityUpdated = this.cambiarNombreEntidadBebidaDomain(entity, valueObject);
-        return this.exectuePedidoAggregateRoot(entityUpdated)
+        this.cambiarNombreEntidadBebidaDomain(command.bebidaId, command.nuevoNombre);
+        return this.exectuePedidoAggregateRoot(command.bebidaId, command.nuevoNombre)
     }
 
     private createValueObject(
         command: Command
     ): IBebidaDomainEntity {
-
         const bebidaId = new BebidaIdValueObject(command.bebidaId);
         const nombre = new NombreValueObject(command.nuevoNombre);
 
@@ -84,36 +80,17 @@ export class CambiarNombreBebidaUseCase<
 
     }
 
-    private async obtenerEntityBebidaDomain(
-        objetoDeValor: IBebidaDomainEntity
-    ): Promise<BebidaDomainEntityBase> | null{
-
-        const bebidaId = objetoDeValor.bebidaId.valueOf();
-
-        let entidad = this.bebidaService.obtenerBebida(bebidaId)
-
-        return entidad;
-    }
-
     private cambiarNombreEntidadBebidaDomain(
-        entidad: BebidaDomainEntityBase | null,
-        objetoDeValor: IBebidaDomainEntity
-    ): BebidaDomainEntityBase {
-        if(entidad != null) {
-            const entidadActualizada = entidad;
-            entidadActualizada.nombre = objetoDeValor.nombre;
-
-            return entidadActualizada;
-        }
+        bebidaId: string,
+        nuevoNombre: string
+    ): Promise<string> {
+        return this.bebidaService.cambiarNombre(bebidaId, nuevoNombre);
     }
 
     private exectuePedidoAggregateRoot(
-        entity: BebidaDomainEntityBase
-    ): Promise<string | null> {
-        this.pedidoAggregateRoot
-        const bebidaId = entity.bebidaId.valueOf();
-        const nuevoNombre = entity.bebidaId.valueOf();
-        
+        bebidaId: string,
+        nuevoNombre: string
+    ): Promise<string | null> {        
         return this.pedidoAggregateRoot.cambiarNombreBebida(bebidaId, nuevoNombre)
     }
 }
