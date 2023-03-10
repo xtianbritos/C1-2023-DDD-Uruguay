@@ -12,6 +12,7 @@ export * from './bebida';
 
 export * from './crear-pedido.command';
 export * from './cambiar-nombre-bebida.command';
+export * from './cambiar-tamaño-bebida.command';
 export * from './cambiar-nombre-postre.command';
 export * from './cambiar-estado-pedido.command';
 export * from './cambiar-precio-pedido.command';

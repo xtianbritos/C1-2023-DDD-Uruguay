@@ -3,6 +3,7 @@ export * from './entrada-creada.response';
 export * from './estado-pedido-cambiado.response';
 export * from './precio-pedido-cambiado.response';
 export * from './nombre-bebida-cambiado.response';
+export * from './tamaño-bebida-cambiado.response';
 export * from './nombre-entrada-cambiado.response';
 export * from './nombre-postre-cambiado.response';
 export * from './nombre-plato-principal-cambiado.response';
