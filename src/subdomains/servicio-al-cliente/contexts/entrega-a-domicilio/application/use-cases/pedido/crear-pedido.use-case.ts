@@ -9,24 +9,11 @@ import {
     PostreDomainEntityBase
 } from "../../../domain/entities/pedido";
 
-import {
-    BebidaCreadaEventPublisherBase, 
-    EntradaCreadaEventPublisherBase,
-    PedidoCreadoEventPublisherBase,
-    PlatoPrincipalCreadoEventPublisherBase,
-    PostreCreadoEventPublisherBase,
-    PedidoObtenidoEventPublisherBase
-} from "../../../domain/events/publishers/pedido";
+import { PedidoCreadoEventPublisherBase } from "../../../domain/events/publishers/pedido";
 
 import { ICrearPedidoCommand } from "../../../domain/interfaces/commands/pedido";
 import { IPedidoCreadoResponse } from "../../../domain/interfaces/responses/pedido";
-import {
-    IBebidaDomainService,
-    IEntradaDomainService,
-    IPedidoDomainService,
-    IPlatoPrincipalDomainService,
-    IPostreDomainService
-} from "../../../domain/services";
+import { IPedidoDomainService } from "../../../domain/services";
 
 import {
     EsParaVeganosValueObject,
@@ -50,30 +37,12 @@ export class CrearPedidoUseCase<
 
     constructor(
         private readonly pedidoService: IPedidoDomainService<PedidoDomainEntityBase>,
-        private readonly entradaService?: IEntradaDomainService<EntradaDomainEntityBase>,
-        private readonly platoPrincipalService?: IPlatoPrincipalDomainService<PlatoPrincipalDomainEntityBase>,
-        private readonly postreService?: IPostreDomainService<PostreDomainEntityBase>,
-        private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
         private readonly pedidoCreadoEventPublisherBase?: PedidoCreadoEventPublisherBase,
-        private readonly entradaCreadaEventPublisherBase?: EntradaCreadaEventPublisherBase,
-        private readonly platoPrincipalCreadoEventPublisherBase?: PlatoPrincipalCreadoEventPublisherBase,
-        private readonly postreCreadoEventPublisherBase?: PostreCreadoEventPublisherBase,
-        private readonly bebidaCreadaEventPublisherBase?: BebidaCreadaEventPublisherBase,
-        private readonly pedidoObtenidoEventPublisherBase?: PedidoObtenidoEventPublisherBase
     ) {
         super();
         this.pedidoAggregateRoot = new PedidoAggregate({
             pedidoService,
-            entradaService,
-            platoPrincipalService,
-            postreService,
-            bebidaService,
-            pedidoCreadoEventPublisherBase,
-            entradaCreadaEventPublisherBase,
-            platoPrincipalCreadoEventPublisherBase,
-            postreCreadoEventPublisherBase,
-            bebidaCreadaEventPublisherBase,
-            pedidoObtenidoEventPublisherBase
+            pedidoCreadoEventPublisherBase
         })
     }
 

@@ -6,7 +6,7 @@ import { ICambiarNombreBebidaCommand } from "../../../domain/interfaces/commands
 import { INombreBebidaCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
 import { IBebidaDomainService } from "../../../domain/services";
 import { BebidaIdValueObject, NombreValueObject } from "../../../domain/value-objects/pedido/bebida";
-import { NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
+import { BebidaObtenidaEventPublisherBase, NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
 
 
 export class CambiarNombreBebidaUseCase<
@@ -22,11 +22,13 @@ export class CambiarNombreBebidaUseCase<
     constructor(
         private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
         private readonly nombreBebidaCambiadoEventPublisherBase?: NombreBebidaCambiadoEventPublisherBase,
+        private readonly bebidaObtenidaEventPublisherBase?: BebidaObtenidaEventPublisherBase,
     ) {
         super();
         this.pedidoAggregateRoot = new PedidoAggregate({
             bebidaService,
-            nombreBebidaCambiadoEventPublisherBase
+            nombreBebidaCambiadoEventPublisherBase,
+            bebidaObtenidaEventPublisherBase
         })
     }
 
