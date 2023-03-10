@@ -43,6 +43,7 @@ export class ObtenerPedidoUseCase<
         const ValueObject = this.obtenerValueObject(command);
         this.validateValueObject(ValueObject);
         const entity = await this.obtenerEntityPedidoDomain(ValueObject.pedidoId.valueOf());
+        if (entity === null) return null;
         return this.exectuePedidoAggregateRoot(entity.pedidoId.valueOf())
     }
 

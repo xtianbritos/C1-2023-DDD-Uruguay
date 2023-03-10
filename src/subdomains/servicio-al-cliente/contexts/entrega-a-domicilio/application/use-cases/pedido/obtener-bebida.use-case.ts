@@ -43,6 +43,7 @@ export class ObtenerBebidaUseCase<
         const ValueObject = this.obtenerValueObject(command);
         this.validateValueObject(ValueObject);
         const entity = await this.obtenerEntityBebidaDomain(ValueObject.bebidaId.valueOf());
+        if (entity === null) return null;
         return this.exectuePedidoAggregateRoot(entity.bebidaId.valueOf())
     }
 
