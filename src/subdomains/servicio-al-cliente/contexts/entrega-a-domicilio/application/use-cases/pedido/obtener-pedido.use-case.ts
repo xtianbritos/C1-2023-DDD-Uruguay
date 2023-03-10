@@ -43,7 +43,6 @@ export class ObtenerPedidoUseCase<
         const ValueObject = this.obtenerValueObject(command);
         this.validateValueObject(ValueObject);
         const entity = await this.obtenerEntityPedidoDomain(ValueObject.pedidoId.valueOf());
-        if (entity === null) return null;
         return this.exectuePedidoAggregateRoot(entity.pedidoId.valueOf())
     }
 
@@ -78,7 +77,7 @@ export class ObtenerPedidoUseCase<
 
     private async obtenerEntityPedidoDomain(
         pedidoId: string
-    ): Promise<PedidoDomainEntityBase | null> {
+    ): Promise<PedidoDomainEntityBase> {
 
         const pedido = this.pedidoService.obtenerPedido(pedidoId);
 

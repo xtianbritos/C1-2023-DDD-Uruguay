@@ -42,7 +42,10 @@ export class CambiarNombreBebidaUseCase<
     ): Promise<string | null> {
         const valueObject = this.createValueObject(command);
         this.validateValueObject(valueObject);
-        this.cambiarNombreEntidadBebidaDomain(command.bebidaId, command.nuevoNombre);
+        const nombreCambiado = await this.cambiarNombreEntidadBebidaDomain(
+            command.bebidaId,
+            command.nuevoNombre
+        );
         return this.exectuePedidoAggregateRoot(command.bebidaId, command.nuevoNombre)
     }
 
@@ -80,10 +83,10 @@ export class CambiarNombreBebidaUseCase<
 
     }
 
-    private cambiarNombreEntidadBebidaDomain(
+    private async cambiarNombreEntidadBebidaDomain(
         bebidaId: string,
         nuevoNombre: string
-    ): Promise<string> {
+    ): Promise<string>{
         return this.bebidaService.cambiarNombre(bebidaId, nuevoNombre);
     }
 
