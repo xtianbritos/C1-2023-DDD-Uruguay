@@ -42,8 +42,7 @@ export class ObtenerPedidoUseCase<
     ): Promise<PedidoDomainEntityBase | null> {
         const ValueObject = this.obtenerValueObject(command);
         this.validateValueObject(ValueObject);
-        const entity = await this.obtenerEntityPedidoDomain(ValueObject.pedidoId.valueOf());
-        return this.exectuePedidoAggregateRoot(entity.pedidoId.valueOf())
+        return this.exectuePedidoAggregateRoot(ValueObject.pedidoId.valueOf())
     }
 
     private obtenerValueObject(
@@ -73,15 +72,6 @@ export class ObtenerPedidoUseCase<
                 this.getErrors(),
             );
 
-    }
-
-    private async obtenerEntityPedidoDomain(
-        pedidoId: string
-    ): Promise<PedidoDomainEntityBase> {
-
-        const pedido = this.pedidoService.obtenerPedido(pedidoId);
-
-        return pedido;
     }
 
     private exectuePedidoAggregateRoot(

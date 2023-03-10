@@ -42,8 +42,7 @@ export class ObtenerBebidaUseCase<
     ): Promise<BebidaDomainEntityBase | null> {
         const ValueObject = this.obtenerValueObject(command);
         this.validateValueObject(ValueObject);
-        const entity = await this.obtenerEntityBebidaDomain(ValueObject.bebidaId.valueOf());
-        return this.exectuePedidoAggregateRoot(entity.bebidaId.valueOf())
+        return this.exectuePedidoAggregateRoot(ValueObject.bebidaId.valueOf())
     }
 
     private obtenerValueObject(
@@ -73,15 +72,6 @@ export class ObtenerBebidaUseCase<
                 this.getErrors(),
             );
 
-    }
-
-    private async obtenerEntityBebidaDomain(
-        bebidaId: string
-    ): Promise<BebidaDomainEntityBase> {
-
-        const bebida = this.bebidaService.obtenerBebida(bebidaId);
-
-        return bebida;
     }
 
     private exectuePedidoAggregateRoot(
