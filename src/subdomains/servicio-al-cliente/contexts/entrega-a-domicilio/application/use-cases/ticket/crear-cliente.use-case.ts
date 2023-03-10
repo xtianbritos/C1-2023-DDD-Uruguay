@@ -5,7 +5,7 @@ import { ClienteDomainEntityBase } from "../../../domain/entities/ticket";
 import { ICrearClienteCommand } from "../../../domain/interfaces/commands/ticket";
 import { IClienteCreadoResponse } from "../../../domain/interfaces/responses/ticket";
 import { IClienteDomainService } from "../../../domain/services";
-import { NombreValueObject } from "../../../domain/value-objects/ticket/cliente";
+import { DireccionValueObject, NombreValueObject } from "../../../domain/value-objects/ticket/cliente";
 import { ClienteCreadoEventPublisherBase } from '../../../domain/events/publishers/ticket';
 
 
@@ -51,9 +51,11 @@ export class CrearClienteUseCase<
     ): IClienteDomainEntity {
 
         const nombre = new NombreValueObject(command.nombre);
+        const direccion = new DireccionValueObject(command.direccion);
 
         return {
-            nombre
+            nombre,
+            direccion
         }
     }
 
@@ -61,11 +63,15 @@ export class CrearClienteUseCase<
         valueObject: IClienteDomainEntity
     ): void {
         const {
-            nombre
+            nombre,
+            direccion
         } = valueObject
 
         if (nombre instanceof NombreValueObject && nombre.hasErrors())
             this.setErrors(nombre.getErrors());
+
+        if (direccion instanceof DireccionValueObject && direccion.hasErrors())
+            this.setErrors(direccion.getErrors());
 
         if (this.hasErrors() === true)
             throw new ValueObjectException(
@@ -80,11 +86,13 @@ export class CrearClienteUseCase<
     ): ClienteDomainEntityBase {
 
         const {
-            nombre
+            nombre,
+            direccion
         } = valueObject
 
         return new ClienteDomainEntityBase({
-            nombre: nombre.valueOf()
+            nombre: nombre.valueOf(),
+            direccion: direccion.valueOf()
         })
     }
 
