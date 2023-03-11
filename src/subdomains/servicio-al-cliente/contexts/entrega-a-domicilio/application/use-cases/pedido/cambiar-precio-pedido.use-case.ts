@@ -1,12 +1,13 @@
-import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/libs/sofka";
+import { AggregateRootException, IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/libs/sofka";
 import { PedidoAggregate } from "../../../domain/aggregates";
 import { IPedidoDomainEntity } from "../../../domain/entities/interfaces/pedido";
 import { PedidoDomainEntityBase } from "../../../domain/entities/pedido";
-import { ICambiarPrecioPedidoCommand } from "../../../domain/interfaces/commands/pedido";
-import { IPrecioPedidoCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
+import { ICambiarPrecioPedidoCommand, IObtenerPedidoCommand } from "../../../domain/interfaces/commands/pedido";
+import { IPedidoObtenidoResponse, IPrecioPedidoCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
 import { IPedidoDomainService } from "../../../domain/services";
 import { PedidoIdValueObject, PrecioValueObject } from "../../../domain/value-objects/pedido";
 import { PrecioPedidoCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
+import { ObtenerPedidoUseCase } from './obtener-pedido.use-case';
 
 
 export class CambiarPrecioPedidoUseCase<
@@ -18,6 +19,10 @@ export class CambiarPrecioPedidoUseCase<
 {
 
     private readonly pedidoAggregateRoot: PedidoAggregate;
+    private readonly ObtenerPedidoUseCase: ObtenerPedidoUseCase<
+        IObtenerPedidoCommand,
+        IPedidoObtenidoResponse
+    >;
 
     constructor(
         private readonly pedidoService?: IPedidoDomainService<PedidoDomainEntityBase>,
@@ -42,7 +47,7 @@ export class CambiarPrecioPedidoUseCase<
     ): Promise<number | null> {
         const valueObject = this.createValueObject(command);
         this.validateValueObject(valueObject);
-        const entity = await this.obtenerEntityPedidoDomain(valueObject);
+        const entity = await this.obtenerEntityPedidoDomain(command);
         const entityUpdated = this.cambiarPrecioEntityPedidoDomain(entity, valueObject);
         return this.exectuePedidoAggregateRoot(entityUpdated)
     }
@@ -64,12 +69,8 @@ export class CambiarPrecioPedidoUseCase<
         valueObject: IPedidoDomainEntity
     ): void {
         const {
-            pedidoId,
             precio
         } = valueObject
-
-        if (pedidoId instanceof PedidoIdValueObject && pedidoId.hasErrors())
-            this.setErrors(pedidoId.getErrors());
 
         if (precio instanceof PrecioValueObject && precio.hasErrors())
             this.setErrors(precio.getErrors());
@@ -83,14 +84,15 @@ export class CambiarPrecioPedidoUseCase<
     }
 
     private async obtenerEntityPedidoDomain(
-        valueObject: IPedidoDomainEntity
+        command: IObtenerPedidoCommand
     ): Promise<PedidoDomainEntityBase> {
+        const success = (await this.ObtenerPedidoUseCase.execute(command)).success;
+        const entity = (await this.ObtenerPedidoUseCase.execute(command)).data;
 
-        const {
-            pedidoId
-        } = valueObject;
+        if (entity === null || success === false)
+            throw new Error('No se ha podido obtener la entidad');
 
-        return this.pedidoService.obtenerPedido(pedidoId.valueOf());
+        return entity;
     }
 
     private cambiarPrecioEntityPedidoDomain(

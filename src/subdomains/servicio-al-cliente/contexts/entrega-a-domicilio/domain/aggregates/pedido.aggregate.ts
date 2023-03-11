@@ -187,9 +187,9 @@ export class PedidoAggregate
             )
         }
 
-        async cambiarPrecioPedido(pedidoId: string, nuevoPRecio: number): Promise<number> {
+        async cambiarPrecioPedido(pedidoId: string, nuevoPrecio: number): Promise<number> {
             if(this.pedidoService && this.precioPedidoCambiadoEventPublisherBase) {
-                const result = await this.pedidoService.cambiarPrecioPedido(pedidoId, nuevoPRecio);
+                const result = await this.pedidoService.cambiarPrecioPedido(pedidoId, nuevoPrecio);
                 this.precioPedidoCambiadoEventPublisherBase.response = result;
                 this.precioPedidoCambiadoEventPublisherBase.publish();
                 return this.precioPedidoCambiadoEventPublisherBase.response;
