@@ -1,4 +1,4 @@
-import { AggregateRootException, IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/libs/sofka";
+import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/libs/sofka";
 import { PedidoAggregate } from "../../../domain/aggregates";
 import { IPedidoDomainEntity } from "../../../domain/entities/interfaces/pedido";
 import { PedidoDomainEntityBase } from "../../../domain/entities/pedido";

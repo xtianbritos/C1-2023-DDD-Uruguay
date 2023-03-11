@@ -2,11 +2,12 @@ import { IUseCase, ValueObjectErrorHandler, ValueObjectException } from "src/lib
 import { PedidoAggregate } from "../../../domain/aggregates";
 import { IBebidaDomainEntity } from "../../../domain/entities/interfaces/pedido";
 import { BebidaDomainEntityBase } from "../../../domain/entities/pedido";
-import { ICambiarNombreBebidaCommand } from "../../../domain/interfaces/commands/pedido";
-import { INombreBebidaCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
+import { ICambiarNombreBebidaCommand, IObtenerBebidaCommand } from "../../../domain/interfaces/commands/pedido";
+import { IBebidaObtenidaResponse, INombreBebidaCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
 import { IBebidaDomainService } from "../../../domain/services";
-import { BebidaIdValueObject, NombreValueObject } from "../../../domain/value-objects/pedido/bebida";
+import { BebidaIdValueObject, NombreValueObject } from "../../../domain/value-objects/pedido";
 import { NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
+import { ObtenerBebidaUseCase } from './obtener-bebida.use-case';
 
 
 export class CambiarNombreBebidaUseCase<
@@ -18,6 +19,10 @@ export class CambiarNombreBebidaUseCase<
 {
 
     private readonly pedidoAggregateRoot: PedidoAggregate;
+    private readonly ObtenerBebidaUseCase: ObtenerBebidaUseCase<
+        IObtenerBebidaCommand,
+        IBebidaObtenidaResponse
+    >;
 
     constructor(
         private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
@@ -42,9 +47,9 @@ export class CambiarNombreBebidaUseCase<
     ): Promise<string | null> {
         const valueObject = this.createValueObject(command);
         this.validateValueObject(valueObject);
-        const entity = await this.obtenerEntityBebidaDomain(valueObject);
+        const entity = await this.obtenerEntityBebidaDomain(command);
         const entityUpdated = this.cambiarNombreEntityBebidaDomain(entity, valueObject);
-        return this.exectuePedidoAggregateRoot(entityUpdated)
+        return this.exectueBebidaAggregateRoot(entityUpdated)
     }
 
     private createValueObject(
@@ -64,12 +69,8 @@ export class CambiarNombreBebidaUseCase<
         valueObject: IBebidaDomainEntity
     ): void {
         const {
-            bebidaId,
             nombre
         } = valueObject
-
-        if (bebidaId instanceof BebidaIdValueObject && bebidaId.hasErrors())
-            this.setErrors(bebidaId.getErrors());
 
         if (nombre instanceof NombreValueObject && nombre.hasErrors())
             this.setErrors(nombre.getErrors());
@@ -83,14 +84,15 @@ export class CambiarNombreBebidaUseCase<
     }
 
     private async obtenerEntityBebidaDomain(
-        valueObject: IBebidaDomainEntity
+        command: IObtenerBebidaCommand
     ): Promise<BebidaDomainEntityBase> {
+        const success = (await this.ObtenerBebidaUseCase.execute(command)).success;
+        const entity = (await this.ObtenerBebidaUseCase.execute(command)).data;
 
-        const {
-            bebidaId
-        } = valueObject;
+        if (entity === null || success === false)
+            throw new Error('No se ha podido obtener la entidad');
 
-        return this.bebidaService.obtenerBebida(bebidaId.valueOf());
+        return entity;
     }
 
     private cambiarNombreEntityBebidaDomain(
@@ -107,7 +109,7 @@ export class CambiarNombreBebidaUseCase<
         return entity;
     }
 
-    private exectuePedidoAggregateRoot(
+    private exectueBebidaAggregateRoot(
         entity: BebidaDomainEntityBase,
     ): Promise<string | null> {
         const bebidaId = entity.bebidaId.valueOf();
