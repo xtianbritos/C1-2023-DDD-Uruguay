@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { IRepository } from './base/repository.base';
-import { ClientMySqlEntity } from '../entities/client.entity';
+import { ClientMySqlEntity } from '../entities/ticket/cliente.entity';
 
 @Injectable()
 export class ClientRepository

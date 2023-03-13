@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IClientDomainService } from "src/subdomains/consulting_room/contexts/management_system/domain";
-import { ClientMySqlEntity } from "../entities/client.entity";
+import { ClientMySqlEntity } from "../entities/ticket/cliente.entity";
 import { ClientRepository } from '../repositories/client.repository';
 
 @Injectable()
