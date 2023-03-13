@@ -37,7 +37,7 @@ export class RepartidorMySqlRepository
         return nombre;
     }
 
-    async updateDireccion(repartidorId: string, vehiculo: string): Promise<string> {
+    async updateVehiculo(repartidorId: string, vehiculo: string): Promise<string> {
         const repartidor = await this.repository.findOneBy({ repartidorId })
         if (!repartidor) throw new BadRequestException(`No se encontró un repartidor con el id: ${repartidorId}`)
         repartidor.vehiculo = vehiculo;
