@@ -1,11 +1,39 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmMySqlConfigService } from './configs/type-orm.mysql.service';
-import { ClientMySqlEntity } from './entities/ticket/cliente.entity';
-import { InovoiceMySqlEntity } from './entities/ticket/ticket.entity';
-import { OrderMySqlEntity } from './entities/ticket/order.entity';
-import { ClientMySqlService } from './services/ticket/cliente.service';
-import { ClientRepository } from './repositories/ticket/cliente.repository';
+import {
+    BebidaMySqlEntity,
+    EntradaMySqlEntity,
+    PedidoMySqlEntity,
+    PlatoPrincipalMySqlEntity,
+    PostreMySqlEntity,
+    RepartidorMySqlEntity,
+    ClienteMySqlEntity,
+    TicketMySqlEntity
+} from './entities';
+
+import {
+    RepartidorMySqlService,
+    ClienteMySqlService,
+    TicketMySqlService,
+    PedidoMySqlService,
+    EntradaMySqlService,
+    PlatoPrincipalMySqlService,
+    PostreMySqlService,
+    BebidaMySqlService
+} from './services';
+
+import {
+    RepartidorMySqlRepository,
+    ClienteMySqlRepository,
+    TicketMySqlRepository,
+    PedidoMySqlRepository,
+    EntradaMySqlRepository,
+    PlatoPrincipalMySqlRepository,
+    PostreMySqlRepository,
+    BebidaMySqlRepository
+} from './repositories';
+
 
 @Module({
     imports: [
@@ -14,20 +42,53 @@ import { ClientRepository } from './repositories/ticket/cliente.repository';
         }),
 
         TypeOrmModule.forFeature([
-            ClientMySqlEntity,
-            InovoiceMySqlEntity,
-            OrderMySqlEntity,
+            TicketMySqlEntity,
+            ClienteMySqlEntity,
+            RepartidorMySqlEntity,
+            PedidoMySqlEntity,
+            EntradaMySqlEntity,
+            PlatoPrincipalMySqlEntity,
+            BebidaMySqlEntity,
+            PostreMySqlEntity
         ])
     ],
     providers: [
-        ClientMySqlService,
+        RepartidorMySqlService,
+        ClienteMySqlService,
+        TicketMySqlService,
+        PedidoMySqlService,
+        EntradaMySqlService,
+        PlatoPrincipalMySqlService,
+        PostreMySqlService,
+        BebidaMySqlService,
 
-        ClientRepository,
+        RepartidorMySqlRepository,
+        ClienteMySqlRepository,
+        TicketMySqlRepository,
+        PedidoMySqlRepository,
+        EntradaMySqlRepository,
+        PlatoPrincipalMySqlRepository,
+        PostreMySqlRepository,
+        BebidaMySqlRepository
     ],
     exports: [
-        ClientMySqlService,
+        RepartidorMySqlService,
+        ClienteMySqlService,
+        TicketMySqlService,
+        PedidoMySqlService,
+        EntradaMySqlService,
+        PlatoPrincipalMySqlService,
+        PostreMySqlService,
+        BebidaMySqlService,
 
-        ClientRepository,
+        RepartidorMySqlRepository,
+        ClienteMySqlRepository,
+        TicketMySqlRepository,
+        PedidoMySqlRepository,
+        EntradaMySqlRepository,
+        PlatoPrincipalMySqlRepository,
+        PostreMySqlRepository,
+        BebidaMySqlRepository
     ]
 })
 export class MySqlModule { }
