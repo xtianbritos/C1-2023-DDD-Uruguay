@@ -14,24 +14,24 @@ import {
 @Module({
     imports: [MySqlModule],
     providers: [
-        // TicketService,
-        // ClienteService,
-        // RepartidorService,
-        // PedidoService,
-        // EntradaService,
-        // PlatoPrincipalService,
-        // PostreService,
-        // BebidaService
+        TicketService,
+        ClienteService,
+        RepartidorService,
+        PedidoService,
+        EntradaService,
+        PlatoPrincipalService,
+        PostreService,
+        BebidaService
     ],
     exports: [
-        // TicketService,
-        // ClienteService,
-        // RepartidorService,
-        // PedidoService,
-        // EntradaService,
-        // PlatoPrincipalService,
-        // PostreService,
-        // BebidaService
+        TicketService,
+        ClienteService,
+        RepartidorService,
+        PedidoService,
+        EntradaService,
+        PlatoPrincipalService,
+        PostreService,
+        BebidaService
     ]
 })
 export class PersistenceModule { }
