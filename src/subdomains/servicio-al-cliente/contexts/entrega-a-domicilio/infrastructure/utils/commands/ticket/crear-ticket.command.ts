@@ -1,15 +1,17 @@
-import { IClienteDomainEntity, IPedidoDomainEntity, IRepartidorDomainEntity } from '../../../entities/interfaces';
+import { IsUUID, IsArray, IsObject } from "class-validator";
+import { IClienteDomainEntity, ICrearTicketCommand, IPedidoDomainEntity, IRepartidorDomainEntity } from "../../../../domain";
 
-/**
- *Interfaz para el comando Crear Ticket
- *
- * @export
- * @interface ICrearTicketCommand
- */
-export interface ICrearTicketCommand {
+export class CrearTicketCommand implements ICrearTicketCommand {
+
+    @IsUUID()
     ticketId?: string;
+
+    @IsArray()
     listaPedidos?: IPedidoDomainEntity[];
+
+    @IsObject()
     cliente?: IClienteDomainEntity;
+
+    @IsObject()
     repartidor?: IRepartidorDomainEntity;
-    createdAt?: number | Date;
 }

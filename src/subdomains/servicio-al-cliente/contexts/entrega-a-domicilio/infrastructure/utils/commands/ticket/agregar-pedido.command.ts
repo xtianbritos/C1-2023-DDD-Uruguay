@@ -1,11 +1,12 @@
+import { IsString, IsUUID } from "class-validator";
+import { IAgregarPedidoCommand } from "../../../../domain/interfaces/commands/ticket/agregar-pedido.command";
 
-/**
- *Interfaz para el comando Agregar Pedido
- *
- * @export
- * @interface IAgregarPedidoCommand
- */
- export interface IAgregarPedidoCommand {
+
+ export class AgregarPedidoCommand implements IAgregarPedidoCommand {
+
+    @IsUUID()
     ticketId?: string;
+
+    @IsString()
     pedidoId?: string;
 }

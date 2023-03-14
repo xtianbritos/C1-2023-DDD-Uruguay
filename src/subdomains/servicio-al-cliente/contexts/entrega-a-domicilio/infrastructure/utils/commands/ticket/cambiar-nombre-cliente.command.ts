@@ -1,11 +1,11 @@
+import { IsString, IsUUID } from "class-validator";
+import { ICambiarNombreClienteCommand } from "../../../../domain/interfaces/commands/ticket/cambiar-nombre-cliente.command";
 
-/**
- *Interfaz para el comando Cambiar Nombre Cliente
- *
- * @export
- * @interface ICambiarNombreClienteCommand
- */
- export interface ICambiarNombreClienteCommand {
+ export class CambiarNombreClienteCommand implements ICambiarNombreClienteCommand {
+
+    @IsUUID()
     clienteId?: string;
+
+    @IsString()
     nuevoNombre?: string;
 }

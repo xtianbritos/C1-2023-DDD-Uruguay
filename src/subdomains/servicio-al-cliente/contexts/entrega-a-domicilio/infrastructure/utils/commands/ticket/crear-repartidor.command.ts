@@ -1,13 +1,14 @@
+import { IsString, IsUUID } from "class-validator";
+import { ICrearRepartidorCommand } from "../../../../domain";
 
-/**
- *Interfaz para el comando Crear Repartidor
- *
- * @export
- * @interface ICrearRepartidorCommand
- */
-export interface ICrearRepartidorCommand {
+export class CrearRepartidorCommand implements ICrearRepartidorCommand {
+
+    @IsUUID()
     repartidorId?: string;
+
+    @IsString()
     nombre?: string;
+
+    @IsString()
     vehiculo?: string;
-    createdAt?: number | Date;
 }

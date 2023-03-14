@@ -1,11 +1,11 @@
+import { IsString, IsUUID } from "class-validator";
+import { IBorrarPedidoCommand } from "../../../../domain/interfaces/commands/ticket/borrar-pedido.command";
 
-/**
- *Interfaz para el comando Borrar Pedido
- *
- * @export
- * @interface IBorrarPedidoCommand
- */
- export interface IBorrarPedidoCommand {
+ export class BorrarPedidoCommand implements IBorrarPedidoCommand {
+
+    @IsUUID()
     ticketId?: string;
+
+    @IsString()
     pedidoId?: string;
 }

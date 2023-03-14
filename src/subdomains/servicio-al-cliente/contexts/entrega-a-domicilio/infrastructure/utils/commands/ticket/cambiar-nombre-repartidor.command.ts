@@ -1,11 +1,11 @@
+import { IsString, IsUUID } from "class-validator";
+import { ICambiarNombreRepartidorCommand } from "../../../../domain/interfaces/commands/ticket/cambiar-nombre-repartidor.command";
 
-/**
- *Interfaz para el comando Cambiar Nombre Repartidor
- *
- * @export
- * @interface ICambiarNombreRepartidorCommand
- */
- export interface ICambiarNombreRepartidorCommand {
+ export class CambiarNombreRepartidorCommand implements ICambiarNombreRepartidorCommand {
+
+    @IsUUID()
     repartidorId?: string;
+
+    @IsString()
     nuevoNombre?: string;
 }
