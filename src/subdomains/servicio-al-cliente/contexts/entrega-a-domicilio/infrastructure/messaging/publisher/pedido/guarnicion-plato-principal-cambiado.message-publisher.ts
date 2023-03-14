@@ -2,12 +2,12 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import { IEventPublisher } from 'src/libs/sofka';
-import { PostreEsParaVeganosCambiadoEventPublisherBase } from '../../../../domain/events/publishers/pedido';
-import { PostreEntity } from '../../../persistence/entities';
+import { GuarnicionPlatoPrincipalCambiadoEventPublisherBase } from '../../../../domain/events/publishers/pedido';
+import { PlatoPrincipalEntity } from '../../../persistence/entities';
 
 
 @Injectable()
-export class PostreEsParaVeganosCambiadoPublisher extends PostreEsParaVeganosCambiadoEventPublisherBase {
+export class GuarnicionPlatoPrincipalCambiadoPublisher extends GuarnicionPlatoPrincipalCambiadoEventPublisherBase {
     constructor(@Inject('ENTREGA-A-DOMICILIO_CONTEXT') private readonly proxy: ClientProxy) {
         super(proxy as unknown as IEventPublisher);
     }
@@ -16,7 +16,7 @@ export class PostreEsParaVeganosCambiadoPublisher extends PostreEsParaVeganosCam
     //   return lastValueFrom<Result>(this.proxy.send(pattern, data));
     // }
 
-    emit<Result = any, Input = PostreEntity>(
+    emit<Result = any, Input = PlatoPrincipalEntity>(
         pattern: any,
         data: Input,
     ): Promise<Result> {
