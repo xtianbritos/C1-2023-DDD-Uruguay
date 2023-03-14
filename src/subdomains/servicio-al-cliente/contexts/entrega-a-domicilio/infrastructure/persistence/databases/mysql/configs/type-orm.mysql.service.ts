@@ -9,7 +9,8 @@ import {
     PlatoPrincipalMySqlEntity,
     PostreMySqlEntity,
     RepartidorMySqlEntity,
-    TicketMySqlEntity
+    TicketMySqlEntity,
+    EventMySqlEntity
 } from "../entities";
 
 @Injectable()
@@ -33,7 +34,8 @@ export class TypeOrmMySqlConfigService implements TypeOrmOptionsFactory {
                 EntradaMySqlEntity,
                 PostreMySqlEntity,
                 PlatoPrincipalMySqlEntity,
-                BebidaMySqlEntity
+                BebidaMySqlEntity,
+                EventMySqlEntity
             ],
             synchronize: true,
         }
