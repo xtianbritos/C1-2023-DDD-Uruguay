@@ -9,14 +9,14 @@ import {
 } from "../../entities/pedido";
 
 import { IPedidoDomainService } from "../../../../../../domain/services";
-import { BebidaMySqlRepository, EntradaMySqlRepository, PedidoMySqlRepository, PlatoPrincipalMySqlRepository, PostreMySqlRepository } from '../../repositories/pedido';
-
 import {
-    EntradaMySqlService,
-    PostreMySqlService,
-    PlatoPrincipalMySqlService,
-    BebidaMySqlService
-} from "./";
+    BebidaMySqlRepository,
+    EntradaMySqlRepository,
+    PedidoMySqlRepository,
+    PlatoPrincipalMySqlRepository,
+    PostreMySqlRepository
+} from '../../repositories/pedido';
+
 
 @Injectable()
 export class PedidoMySqlService
