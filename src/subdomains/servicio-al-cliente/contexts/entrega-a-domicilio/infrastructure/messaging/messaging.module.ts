@@ -1,9 +1,28 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { Transport } from '@nestjs/microservices/enums';
-import { CreatedClientPublisher } from './publisher/created-client.publisher';
-import { CreateOrderPublisher } from './publisher/created-order.publisher';
-import { CreatedClientController } from './subscribers/created-client.subscriber';
+import {
+    // PedidoCreadoPublisher,
+    EntradaCreadaPublisher,
+    PlatoPrincipalCreadoPublisher,
+    PostreCreadoPublisher,
+    BebidaCreadaPublisher,
+
+    // TicketCreadoPublisher,
+    ClienteCreadoPublisher,
+    RepartidorCreadoPublisher,
+    
+    EstadoPedidoCambiadoPublisher,
+    PrecioPedidoCambiadoPublisher,
+    NombreBebidaCambiadoPublisher,
+    TamanioBebidaCambiadoPublisher,
+
+    PedidoObtenidoPublisher,
+    BebidaObtenidaPublisher,
+
+} from './publisher';
+
+import { GenericSubscriberController } from './subscriber';
 
 /**
  * name: el nombre del cliente.
@@ -40,8 +59,44 @@ import { CreatedClientController } from './subscribers/created-client.subscriber
             },
         ]),
     ],
-    controllers: [CreatedClientController],
-    providers: [CreatedClientPublisher, CreateOrderPublisher],
-    exports: [CreatedClientPublisher, CreateOrderPublisher]
+    controllers: [GenericSubscriberController],
+    providers: [
+        // PedidoCreadoPublisher,
+        EntradaCreadaPublisher,
+        PlatoPrincipalCreadoPublisher,
+        PostreCreadoPublisher,
+        BebidaCreadaPublisher,
+
+        // TicketCreadoPublisher,
+        ClienteCreadoPublisher,
+        RepartidorCreadoPublisher,
+        
+        EstadoPedidoCambiadoPublisher,
+        PrecioPedidoCambiadoPublisher,
+        NombreBebidaCambiadoPublisher,
+        TamanioBebidaCambiadoPublisher,
+
+        PedidoObtenidoPublisher,
+        BebidaObtenidaPublisher,
+    ],
+    exports: [
+        // PedidoCreadoPublisher,
+        EntradaCreadaPublisher,
+        PlatoPrincipalCreadoPublisher,
+        PostreCreadoPublisher,
+        BebidaCreadaPublisher,
+
+        // TicketCreadoPublisher,
+        ClienteCreadoPublisher,
+        RepartidorCreadoPublisher,
+        
+        EstadoPedidoCambiadoPublisher,
+        PrecioPedidoCambiadoPublisher,
+        NombreBebidaCambiadoPublisher,
+        TamanioBebidaCambiadoPublisher,
+
+        PedidoObtenidoPublisher,
+        BebidaObtenidaPublisher,
+    ]
 })
 export class MessagingModule { }
