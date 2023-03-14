@@ -42,6 +42,6 @@ export class PedidoDomainEntityBase implements IPedidoDomainEntity {
         
         if(_data?.postre) this.postre = _data.postre;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }

@@ -28,6 +28,6 @@ export class TicketDomainEntityBase implements ITicketDomainEntity {
 
         if(_data?.listaPedidos) this.listaPedidos = _data.listaPedidos;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }

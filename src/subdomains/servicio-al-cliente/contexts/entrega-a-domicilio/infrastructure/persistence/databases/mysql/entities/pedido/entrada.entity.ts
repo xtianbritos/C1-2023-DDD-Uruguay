@@ -11,8 +11,8 @@ export class EntradaMySqlEntity extends EntradaDomainEntityBase {
     @Column()
     nombre: string;
 
-    @Column()
-    createdAt: number;
+    @Column({ type: 'datetime' })
+    createdAt?: number | Date;
 
     @OneToOne( ()=> PedidoMySqlEntity, (pedido)=> pedido.entrada )
     pedido: PedidoMySqlEntity;

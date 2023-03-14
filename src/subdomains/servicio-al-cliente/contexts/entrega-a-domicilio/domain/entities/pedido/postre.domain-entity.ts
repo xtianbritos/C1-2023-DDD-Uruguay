@@ -27,6 +27,6 @@ export class PostreDomainEntityBase implements IPostreDomainEntity {
 
         if(_data?.esParaVeganos) this.esParaVeganos = _data.esParaVeganos;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }

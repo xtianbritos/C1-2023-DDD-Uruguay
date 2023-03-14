@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { Transport } from '@nestjs/microservices/enums';
 import {
-    // PedidoCreadoPublisher,
+    PedidoCreadoPublisher,
     EntradaCreadaPublisher,
     PlatoPrincipalCreadoPublisher,
     PostreCreadoPublisher,
     BebidaCreadaPublisher,
 
-    // TicketCreadoPublisher,
+    TicketCreadoPublisher,
     ClienteCreadoPublisher,
     RepartidorCreadoPublisher,
     
@@ -61,13 +61,13 @@ import { GenericSubscriberController } from './subscriber';
     ],
     controllers: [GenericSubscriberController],
     providers: [
-        // PedidoCreadoPublisher,
+        PedidoCreadoPublisher,
         EntradaCreadaPublisher,
         PlatoPrincipalCreadoPublisher,
         PostreCreadoPublisher,
         BebidaCreadaPublisher,
 
-        // TicketCreadoPublisher,
+        TicketCreadoPublisher,
         ClienteCreadoPublisher,
         RepartidorCreadoPublisher,
         
@@ -80,13 +80,13 @@ import { GenericSubscriberController } from './subscriber';
         BebidaObtenidaPublisher,
     ],
     exports: [
-        // PedidoCreadoPublisher,
+        PedidoCreadoPublisher,
         EntradaCreadaPublisher,
         PlatoPrincipalCreadoPublisher,
         PostreCreadoPublisher,
         BebidaCreadaPublisher,
 
-        // TicketCreadoPublisher,
+        TicketCreadoPublisher,
         ClienteCreadoPublisher,
         RepartidorCreadoPublisher,
         

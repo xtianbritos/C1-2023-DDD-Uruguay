@@ -24,6 +24,6 @@ export class RepartidorDomainEntityBase implements IRepartidorDomainEntity {
 
         if(_data?.vehiculo) this.vehiculo = _data.vehiculo;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }

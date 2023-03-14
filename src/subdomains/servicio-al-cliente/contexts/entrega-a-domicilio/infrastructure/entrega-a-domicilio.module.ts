@@ -5,11 +5,11 @@ import {
     PedidoController,
 
 } from "./controllers";
-
+import { MessagingModule } from "./messaging/messaging.module";
 import { PersistenceModule } from "./persistence/persistence.module";
 
 @Module({
-    imports:[PersistenceModule],
+    imports:[PersistenceModule, MessagingModule],
     controllers:[
         TicketController,
 

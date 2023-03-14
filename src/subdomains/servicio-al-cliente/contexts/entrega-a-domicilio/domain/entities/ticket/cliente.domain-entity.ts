@@ -24,6 +24,6 @@ export class ClienteDomainEntityBase implements IClienteDomainEntity {
 
         if(_data?.direccion) this.direccion = _data.direccion;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }

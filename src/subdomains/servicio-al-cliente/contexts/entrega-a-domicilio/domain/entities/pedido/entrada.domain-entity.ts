@@ -21,6 +21,6 @@ export class EntradaDomainEntityBase implements IEntradaDomainEntity {
 
         if(_data?.nombre) this.nombre = _data.nombre;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }

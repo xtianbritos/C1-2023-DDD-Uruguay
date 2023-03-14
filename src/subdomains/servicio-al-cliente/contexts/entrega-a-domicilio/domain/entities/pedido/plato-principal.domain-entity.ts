@@ -24,6 +24,6 @@ export class PlatoPrincipalDomainEntityBase implements IPlatoPrincipalDomainEnti
 
         if(_data?.guarnicion) this.guarnicion = _data.guarnicion;
 
-        this.createdAt = new Date();
+        this.createdAt = new Date()
     }
 }
