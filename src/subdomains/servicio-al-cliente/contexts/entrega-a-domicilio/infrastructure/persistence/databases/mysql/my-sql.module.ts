@@ -54,40 +54,52 @@ import {
     ],
     providers: [
         TicketMySqlService,
-        RepartidorMySqlService,
-        ClienteMySqlService,
-        PedidoMySqlService,
-        EntradaMySqlService,
-        PlatoPrincipalMySqlService,
-        PostreMySqlService,
-        BebidaMySqlService,
-
         TicketMySqlRepository,
+
+        RepartidorMySqlService,
         RepartidorMySqlRepository,
+        
+        ClienteMySqlService,
         ClienteMySqlRepository,
+        
+        PedidoMySqlService,
         PedidoMySqlRepository,
+        
+        EntradaMySqlService,
         EntradaMySqlRepository,
+        
+        PlatoPrincipalMySqlService,
         PlatoPrincipalMySqlRepository,
+        
+        PostreMySqlService,
         PostreMySqlRepository,
+        
+        BebidaMySqlService,
         BebidaMySqlRepository
     ],
     exports: [
         TicketMySqlService,
-        RepartidorMySqlService,
-        ClienteMySqlService,
-        PedidoMySqlService,
-        EntradaMySqlService,
-        PlatoPrincipalMySqlService,
-        PostreMySqlService,
-        BebidaMySqlService,
-
         TicketMySqlRepository,
+
+        RepartidorMySqlService,
         RepartidorMySqlRepository,
+        
+        ClienteMySqlService,
         ClienteMySqlRepository,
+        
+        PedidoMySqlService,
         PedidoMySqlRepository,
+        
+        EntradaMySqlService,
         EntradaMySqlRepository,
+        
+        PlatoPrincipalMySqlService,
         PlatoPrincipalMySqlRepository,
+        
+        PostreMySqlService,
         PostreMySqlRepository,
+        
+        BebidaMySqlService,
         BebidaMySqlRepository
     ]
 })

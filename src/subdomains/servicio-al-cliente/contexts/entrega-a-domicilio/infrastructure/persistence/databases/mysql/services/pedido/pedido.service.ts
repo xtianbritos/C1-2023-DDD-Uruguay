@@ -9,7 +9,7 @@ import {
 } from "../../entities/pedido";
 
 import { IPedidoDomainService } from "../../../../../../domain/services";
-import { PedidoMySqlRepository } from '../../repositories/pedido';
+import { BebidaMySqlRepository, EntradaMySqlRepository, PedidoMySqlRepository, PlatoPrincipalMySqlRepository, PostreMySqlRepository } from '../../repositories/pedido';
 
 import {
     EntradaMySqlService,
@@ -24,10 +24,10 @@ export class PedidoMySqlService
 
     constructor(
         private readonly pedidoRepository: PedidoMySqlRepository,
-        private readonly entradaService: EntradaMySqlService,
-        private readonly postreService: PostreMySqlService,
-        private readonly platoPrincipalService: PlatoPrincipalMySqlService,
-        private readonly bebidaService: BebidaMySqlService,
+        private readonly entradaRepository: EntradaMySqlRepository,
+        private readonly postreRepository: PostreMySqlRepository,
+        private readonly platoPrincipalRepository: PlatoPrincipalMySqlRepository,
+        private readonly bebidaRepository: BebidaMySqlRepository,
     ) { }
 
 
@@ -49,55 +49,68 @@ export class PedidoMySqlService
 
 
     crearEntrada(entrada: EntradaMySqlEntity): Promise<EntradaMySqlEntity> {
-        return this.entradaService.crearEntrada(entrada);
+        // return this.entradaRepository.crearEntrada(entrada);
+        throw new Error();
     }
 
     cambiarNombreEntrada(entradaId: string, nuevoNombre: string): Promise<string> {
-        return this.entradaService.cambiarNombre(entradaId, nuevoNombre);
+        // return this.entradaRepository.cambiarNombre(entradaId, nuevoNombre);
+        throw new Error();
     }
 
     crearPlatoPrincipal(platoPrincipal: PlatoPrincipalMySqlEntity): Promise<PlatoPrincipalMySqlEntity> {
-        return this.platoPrincipalService.crearPlatoPrincipal(platoPrincipal);
+        // return this.platoPrincipalRepository.crearPlatoPrincipal(platoPrincipal);
+        throw new Error();
     }
 
     cambiarNombrePlatoPrincipal(platoPrincipalId: string, nuevoNombre: string): Promise<string> {
-        return this.platoPrincipalService.cambiarNombre(platoPrincipalId, nuevoNombre);
+        // return this.platoPrincipalRepository.cambiarNombre(platoPrincipalId, nuevoNombre);
+        throw new Error();
     }
 
     cambiarGuarnicionPlatoPrincipal(platoPrincipalId: string, nuevaGuarnicion: string): Promise<string> {
-        return this.platoPrincipalService.cambiarGuarnicion(platoPrincipalId, nuevaGuarnicion);
+        // return this.platoPrincipalRepository.cambiarGuarnicion(platoPrincipalId, nuevaGuarnicion);
+        throw new Error();
     }
 
     crearBebida(bebida: BebidaMySqlEntity): Promise<BebidaMySqlEntity> {
-        return this.bebidaService.crearBebida(bebida);
+        // return this.bebidaRepository.crearBebida(bebida);
+        throw new Error();
     }
 
     obtenerBebida(bebidaId: string): Promise<BebidaMySqlEntity> {
-        return this.bebidaService.obtenerBebida(bebidaId);
+        // return this.bebidaRepository.obtenerBebida(bebidaId);
+        throw new Error();
     }
 
     cambiarNombreBebida(bebidaId: string, nuevoNombre: string): Promise<string> {
-        return this.bebidaService.cambiarNombre(bebidaId, nuevoNombre);
+        // return this.bebidaRepository.cambiarNombre(bebidaId, nuevoNombre);
+        throw new Error();
     }
 
     cambiarTamañoBebida(bebidaId: string, nuevoTamaño: string): Promise<string> {
-        return this.bebidaService.cambiarTamaño(bebidaId, nuevoTamaño);
+        // return this.bebidaRepository.cambiarTamaño(bebidaId, nuevoTamaño);
+        throw new Error();
     }
 
     crearPostre(postre: PostreMySqlEntity): Promise<PostreMySqlEntity> {
-        return this.postreService.crearPostre(postre);
+        // return this.postreRepository.crearPostre(postre);
+        throw new Error();
     }
 
     cambiarNombrePostre(postreId: string, nuevoNombre: string): Promise<string> {
-        return this.postreService.cambiarNombre(postreId, nuevoNombre);
+        // return this.postreRepository.cambiarNombre(postreId, nuevoNombre);
+        throw new Error();
     }
 
     cambiarTamañoPostre(postreId: string, nuevoTamaño: string): Promise<string> {
-        return this.postreService.cambiarTamaño(postreId, nuevoTamaño);
+        // return this.postreRepository.cambiarTamaño(postreId, nuevoTamaño);
+        throw new Error();
     }
 
     cambiarPostreEsPAraVeganos(postreId: string, nuevoEstado: boolean): Promise<boolean> {
-        return this.postreService.cambiarEsParaVeganos(postreId, nuevoEstado);
+        // return this.postreRepository.cambiarEsParaVeganos(postreId, nuevoEstado);
+        throw new Error();
     }
 
 }
