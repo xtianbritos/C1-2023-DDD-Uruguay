@@ -15,7 +15,7 @@ export class PlatoPrincipalMySqlEntity extends PlatoPrincipalDomainEntityBase {
     guarnicion: string;
 
     @Column()
-    createdAt: Date | number;
+    createdAt: number;
 
     @OneToOne( ()=> PedidoMySqlEntity, (pedido)=> pedido.platoPrincipal )
     pedido: PedidoMySqlEntity;

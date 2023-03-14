@@ -15,7 +15,7 @@ export class BebidaMySqlEntity extends BebidaDomainEntityBase {
     tamanio?: string;
 
     @Column()
-    createdAt: Date | number;
+    createdAt: number;
 
     @OneToOne( ()=> PedidoMySqlEntity, (pedido)=> pedido.bebida )
     pedido: PedidoMySqlEntity;

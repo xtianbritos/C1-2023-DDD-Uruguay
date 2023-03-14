@@ -12,7 +12,7 @@ export class EntradaMySqlEntity extends EntradaDomainEntityBase {
     nombre: string;
 
     @Column()
-    createdAt: Date | number;
+    createdAt: number;
 
     @OneToOne( ()=> PedidoMySqlEntity, (pedido)=> pedido.entrada )
     pedido: PedidoMySqlEntity;

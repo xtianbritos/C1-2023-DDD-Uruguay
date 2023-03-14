@@ -12,7 +12,7 @@ export class TicketMySqlEntity extends TicketDomainEntityBase {
     ticketId: string;
 
     @Column()
-    createdAt: number | Date;
+    createdAt: number;
 
 
     @OneToOne(() => ClienteMySqlEntity, (cliente) => cliente.ticket,

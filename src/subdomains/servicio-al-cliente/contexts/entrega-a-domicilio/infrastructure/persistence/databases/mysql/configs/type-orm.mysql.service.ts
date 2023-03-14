@@ -1,6 +1,16 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from "@nestjs/typeorm";
+import {
+    BebidaMySqlEntity,
+    ClienteMySqlEntity,
+    EntradaMySqlEntity,
+    PedidoMySqlEntity,
+    PlatoPrincipalMySqlEntity,
+    PostreMySqlEntity,
+    RepartidorMySqlEntity,
+    TicketMySqlEntity
+} from "../entities";
 
 @Injectable()
 export class TypeOrmMySqlConfigService implements TypeOrmOptionsFactory {
@@ -16,7 +26,14 @@ export class TypeOrmMySqlConfigService implements TypeOrmOptionsFactory {
             password: 'cartoon6',
             database: 'ddd_db',
             entities: [
-                
+                TicketMySqlEntity,
+                ClienteMySqlEntity,
+                RepartidorMySqlEntity,
+                PedidoMySqlEntity,
+                EntradaMySqlEntity,
+                PostreMySqlEntity,
+                PlatoPrincipalMySqlEntity,
+                BebidaMySqlEntity
             ],
             synchronize: true,
         }

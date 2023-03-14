@@ -15,7 +15,7 @@ export class ClienteMySqlEntity extends ClienteDomainEntityBase {
     direccion: string;
 
     @Column()
-    createdAt: Date | number;
+    createdAt: number;
 
     @OneToOne( ()=> TicketMySqlEntity, (ticket)=> ticket.cliente )
     ticket: TicketMySqlEntity;
