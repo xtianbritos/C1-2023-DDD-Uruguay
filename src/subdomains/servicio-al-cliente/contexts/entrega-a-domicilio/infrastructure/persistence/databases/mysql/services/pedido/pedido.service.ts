@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 
 import {
     EntradaMySqlEntity,
-    PlatoPrincipalMySqlEntity,
     BebidaMySqlEntity,
-    PostreMySqlEntity
+    PlatoPrincipalMySqlEntity,
+    PostreMySqlEntity,
+    PedidoMySqlEntity
 } from "../../entities/pedido";
 
 import { IPedidoDomainService } from "../../../../../../domain/services";
-import { PedidoMySqlEntity } from "../../entities/pedido";
 import { PedidoMySqlRepository } from '../../repositories/pedido';
 
 import {

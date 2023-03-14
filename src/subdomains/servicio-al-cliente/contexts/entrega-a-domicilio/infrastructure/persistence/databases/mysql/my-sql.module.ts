@@ -5,9 +5,9 @@ import {
     BebidaMySqlEntity,
     EntradaMySqlEntity,
     PedidoMySqlEntity,
+    RepartidorMySqlEntity,
     PlatoPrincipalMySqlEntity,
     PostreMySqlEntity,
-    RepartidorMySqlEntity,
     ClienteMySqlEntity,
     TicketMySqlEntity
 } from './entities';
@@ -43,52 +43,52 @@ import {
 
         TypeOrmModule.forFeature([
             TicketMySqlEntity,
-            ClienteMySqlEntity,
-            RepartidorMySqlEntity,
+            // ClienteMySqlEntity,
+            // RepartidorMySqlEntity,
             PedidoMySqlEntity,
-            EntradaMySqlEntity,
-            PlatoPrincipalMySqlEntity,
-            BebidaMySqlEntity,
-            PostreMySqlEntity
+            // EntradaMySqlEntity,
+            // PlatoPrincipalMySqlEntity,
+            // BebidaMySqlEntity,
+            // PostreMySqlEntity
         ])
     ],
     providers: [
-        RepartidorMySqlService,
-        ClienteMySqlService,
         TicketMySqlService,
+        // RepartidorMySqlService,
+        // ClienteMySqlService,
         PedidoMySqlService,
-        EntradaMySqlService,
-        PlatoPrincipalMySqlService,
-        PostreMySqlService,
-        BebidaMySqlService,
+        // EntradaMySqlService,
+        // PlatoPrincipalMySqlService,
+        // PostreMySqlService,
+        // BebidaMySqlService,
 
-        RepartidorMySqlRepository,
-        ClienteMySqlRepository,
         TicketMySqlRepository,
+        // RepartidorMySqlRepository,
+        // ClienteMySqlRepository,
         PedidoMySqlRepository,
-        EntradaMySqlRepository,
-        PlatoPrincipalMySqlRepository,
-        PostreMySqlRepository,
-        BebidaMySqlRepository
+        // EntradaMySqlRepository,
+        // PlatoPrincipalMySqlRepository,
+        // PostreMySqlRepository,
+        // BebidaMySqlRepository
     ],
     exports: [
-        RepartidorMySqlService,
-        ClienteMySqlService,
         TicketMySqlService,
+        // RepartidorMySqlService,
+        // ClienteMySqlService,
         PedidoMySqlService,
-        EntradaMySqlService,
-        PlatoPrincipalMySqlService,
-        PostreMySqlService,
-        BebidaMySqlService,
+        // EntradaMySqlService,
+        // PlatoPrincipalMySqlService,
+        // PostreMySqlService,
+        // BebidaMySqlService,
 
-        RepartidorMySqlRepository,
-        ClienteMySqlRepository,
         TicketMySqlRepository,
+        // RepartidorMySqlRepository,
+        // ClienteMySqlRepository,
         PedidoMySqlRepository,
-        EntradaMySqlRepository,
-        PlatoPrincipalMySqlRepository,
-        PostreMySqlRepository,
-        BebidaMySqlRepository
+        // EntradaMySqlRepository,
+        // PlatoPrincipalMySqlRepository,
+        // PostreMySqlRepository,
+        // BebidaMySqlRepository
     ]
 })
 export class MySqlModule { }
