@@ -1,9 +1,10 @@
-import { IsString, IsUUID } from "class-validator";
+import { IsOptional, IsString, IsUUID } from "class-validator";
 import { ICrearRepartidorCommand } from "../../../../domain";
 
 export class CrearRepartidorCommand implements ICrearRepartidorCommand {
 
     @IsUUID()
+    @IsOptional()
     repartidorId?: string;
 
     @IsString()

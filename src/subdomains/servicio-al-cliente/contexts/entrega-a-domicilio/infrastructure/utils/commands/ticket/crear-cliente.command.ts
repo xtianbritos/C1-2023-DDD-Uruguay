@@ -1,9 +1,10 @@
-import { IsString, IsUUID } from "class-validator";
+import { IsOptional, IsString, IsUUID } from "class-validator";
 import { ICrearClienteCommand } from "../../../../domain";
 
 export class CrearClienteCommand implements ICrearClienteCommand {
 
     @IsUUID()
+    @IsOptional()
     clienteId?: string;
 
     @IsString()

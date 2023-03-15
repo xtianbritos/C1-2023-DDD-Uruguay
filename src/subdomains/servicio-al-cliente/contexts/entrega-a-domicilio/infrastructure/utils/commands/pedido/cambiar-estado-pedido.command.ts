@@ -1,9 +1,10 @@
 import { ICambiarEstadoPedidoCommand } from "../../../../domain";
-import { IsString, IsUUID } from 'class-validator';
+import { IsOptional, IsString, IsUUID } from 'class-validator';
 
  export class CambiarEstadoPedidoCommand implements ICambiarEstadoPedidoCommand {
 
     @IsUUID()
+    @IsOptional()
     pedidoId?: string;
 
     @IsString()

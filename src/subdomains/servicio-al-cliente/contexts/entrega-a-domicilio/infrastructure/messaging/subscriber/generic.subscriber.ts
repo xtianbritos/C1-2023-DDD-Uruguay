@@ -3,7 +3,8 @@ import { Ctx, EventPattern, KafkaContext, Payload } from "@nestjs/microservices"
 
 import { EventMySqlEntity, EventMySqlService } from "../../persistence";
 
-interface Idata {
+
+export interface Idata {
     data: Object
 }
 
@@ -91,6 +92,30 @@ export class GenericSubscriberController{
 
     @EventPattern('entrega_a_domicilio.pedido-creado')
     pedidoCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.repartidor-creado')
+    repartidorCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.cliente-creado')
+    clienteCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 

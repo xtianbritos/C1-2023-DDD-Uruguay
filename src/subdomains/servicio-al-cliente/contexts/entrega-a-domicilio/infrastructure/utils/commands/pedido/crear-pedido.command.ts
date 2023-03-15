@@ -1,4 +1,4 @@
-import { IsObject, IsString, IsUUID, IsNumber } from "class-validator";
+import { IsObject, IsString, IsUUID, IsNumber, IsOptional } from "class-validator";
 import {
     IBebidaDomainEntity,
     ICrearPedidoCommand,
@@ -11,6 +11,7 @@ import {
 export class CrearPedidoCommand implements ICrearPedidoCommand{
 
     @IsUUID()
+    @IsOptional()
     pedidoId?: string;
     
     @IsString()
