@@ -48,4 +48,124 @@ export class GenericSubscriberController{
         console.log('Context: ', context)
         console.log('--------------------------------------')
     }
+
+    @EventPattern('entrega_a_domicilio.entrada-creada')
+    entradaCreada(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.postre-creado')
+    postreCreado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.plato-principal-creado')
+    platoPrincipalCreado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.pedido-creado')
+    pedidoCreado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.estado-pedido-cambiado')
+    estadoPedidoCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.precio-pedido-cambiado')
+    precioPedidoCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.nombre-bebida-cambiado')
+    nombreBebidaCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.tamanio-bebida-cambiado')
+    tamanioBebidaCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.bebida-obtenida')
+    bebidaObtenida(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.pedido-obtenido')
+    pedidoObtenido(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
 }
