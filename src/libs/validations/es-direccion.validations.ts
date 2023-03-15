@@ -8,7 +8,8 @@
  */
  export function EsDireccion(valor: string): boolean {
 
-    const regex = /^\p{L}+(\s\p{L}+){1,2}\s\d{1,5}(?!.*\bapto\s\d{1,5}\b).*$/;
+    const regex = 
+    /^([A-Za-zÑñÁáÉéÍíÓóÚú0-9]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú0-9]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú0-9]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú0-9]+))*$/;
 
     const matches = valor.match(regex);
 

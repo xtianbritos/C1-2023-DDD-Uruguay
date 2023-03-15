@@ -5,7 +5,7 @@ import { ClienteDomainEntityBase } from "../../../domain/entities/ticket";
 import { ICrearClienteCommand } from "../../../domain/interfaces/commands/ticket";
 import { IClienteCreadoResponse } from "../../../domain/interfaces/responses/ticket";
 import { IClienteDomainService } from "../../../domain/services";
-import { DireccionValueObject, NombreValueObject } from "../../../domain/value-objects/ticket/cliente";
+import { NombreValueObject, DireccionValueObject } from "../../../domain/value-objects/ticket/cliente";
 import { ClienteCreadoEventPublisherBase } from '../../../domain/events/publishers/ticket';
 
 
