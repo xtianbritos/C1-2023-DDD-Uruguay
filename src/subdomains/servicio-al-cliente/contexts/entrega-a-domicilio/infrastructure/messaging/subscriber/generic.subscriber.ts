@@ -3,13 +3,17 @@ import { Ctx, EventPattern, KafkaContext, Payload } from "@nestjs/microservices"
 
 import { EventMySqlEntity, EventMySqlService } from "../../persistence";
 
+interface Idata {
+    data: Object
+}
+
 
 @Controller()
 export class GenericSubscriberController{
 
     constructor(private readonly eventService?: EventMySqlService) {}
 
-    async crearEvento(data: any, context: KafkaContext) {
+    async crearEvento(data: Idata, context: KafkaContext): Promise<void> {
 
         await this.eventService.crearEvent(
             {
@@ -38,7 +42,7 @@ export class GenericSubscriberController{
      * @memberof GenericSubscriberController
      */
     @EventPattern('entrega_a_domicilio.bebida-creada')
-    bebidaCreada(@Payload() data: any, @Ctx() context: KafkaContext){
+    bebidaCreada(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -50,7 +54,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.entrada-creada')
-    entradaCreada(@Payload() data: any, @Ctx() context: KafkaContext){
+    entradaCreada(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -62,7 +66,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.postre-creado')
-    postreCreado(@Payload() data: any, @Ctx() context: KafkaContext){
+    postreCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -74,7 +78,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.plato-principal-creado')
-    platoPrincipalCreado(@Payload() data: any, @Ctx() context: KafkaContext){
+    platoPrincipalCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -86,7 +90,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.pedido-creado')
-    pedidoCreado(@Payload() data: any, @Ctx() context: KafkaContext){
+    pedidoCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -98,7 +102,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.estado-pedido-cambiado')
-    estadoPedidoCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+    estadoPedidoCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -110,7 +114,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.precio-pedido-cambiado')
-    precioPedidoCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+    precioPedidoCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -122,7 +126,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.nombre-bebida-cambiado')
-    nombreBebidaCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+    nombreBebidaCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -134,7 +138,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.tamanio-bebida-cambiado')
-    tamanioBebidaCambiado(@Payload() data: any, @Ctx() context: KafkaContext){
+    tamanioBebidaCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -146,7 +150,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.bebida-obtenida')
-    bebidaObtenida(@Payload() data: any, @Ctx() context: KafkaContext){
+    bebidaObtenida(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
@@ -158,7 +162,7 @@ export class GenericSubscriberController{
     }
 
     @EventPattern('entrega_a_domicilio.pedido-obtenido')
-    pedidoObtenido(@Payload() data: any, @Ctx() context: KafkaContext){
+    pedidoObtenido(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
         this.crearEvento(data, context);
 
