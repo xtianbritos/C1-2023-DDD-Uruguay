@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -26,7 +28,13 @@ export class EventMySqlRepository
     }
 
     async create(entity: EventMySqlEntity): Promise<EventMySqlEntity> {
-        return await this.repository.save(entity)
+        const event = {
+            eventId: uuid(),
+            data: entity.data,
+            type: entity.type,
+            createdAt: new Date()
+        };
+        return await this.repository.save(event);
     }
 
     async delete(eventId: string): Promise<boolean> {

@@ -1,8 +1,24 @@
 import { Controller } from "@nestjs/common";
 import { Ctx, EventPattern, KafkaContext, Payload } from "@nestjs/microservices";
 
+import { EventMySqlEntity, EventMySqlService } from "../../persistence";
+
+
 @Controller()
 export class GenericSubscriberController{
+
+    constructor(private readonly eventService?: EventMySqlService) {}
+
+    async crearEvento(data: any, context: KafkaContext) {
+
+        await this.eventService.crearEvent(
+            {
+                data: JSON.stringify(data.data),
+                type: context.getTopic()
+            } as EventMySqlEntity
+
+        );
+    }
 
     /**
      * EventPattern se utiliza para definir un patrón de evento de Kafka
@@ -23,6 +39,8 @@ export class GenericSubscriberController{
      */
     @EventPattern('entrega_a_domicilio.bebida-creada')
     bebidaCreada(@Payload() data: any, @Ctx() context: KafkaContext){
+
+        this.crearEvento(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)

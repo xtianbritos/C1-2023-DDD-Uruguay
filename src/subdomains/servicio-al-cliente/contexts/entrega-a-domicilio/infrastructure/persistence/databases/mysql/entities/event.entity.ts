@@ -1,15 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
-@Entity()
+@Entity('event', { schema: 'public' })
 export class EventMySqlEntity {
     @PrimaryGeneratedColumn('uuid')
     eventId?: string;
 
     @Column()
-    type?: string;
+    type: string;
 
     @Column()
-    data?: string;
+    data: string;
 
     @Column()
     createdAt?: Date;

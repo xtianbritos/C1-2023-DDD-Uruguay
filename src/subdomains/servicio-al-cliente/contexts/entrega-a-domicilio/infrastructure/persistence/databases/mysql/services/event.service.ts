@@ -15,7 +15,7 @@ export class EventMySqlService {
         return this.eventRepository.create(event);
     }
     
-    obtenerTodosLosEventos(eventId: string): Promise<EventMySqlEntity[]> {
+    obtenerTodosLosEventos(): Promise<EventMySqlEntity[]> {
         return this.eventRepository.findAll();
     }
 
