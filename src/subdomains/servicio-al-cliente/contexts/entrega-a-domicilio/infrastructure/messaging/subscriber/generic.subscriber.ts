@@ -14,7 +14,7 @@ export class GenericSubscriberController{
 
     constructor(private readonly eventService?: EventMySqlService) {}
 
-    async crearEvento(data: Idata, context: KafkaContext): Promise<void> {
+    async guardarEventEnMySql(data: Idata, context: KafkaContext): Promise<void> {
 
         await this.eventService.crearEvent(
             {
@@ -45,7 +45,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.bebida-creada')
     bebidaCreada(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -57,7 +57,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.entrada-creada')
     entradaCreada(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -69,7 +69,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.postre-creado')
     postreCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -81,7 +81,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.plato-principal-creado')
     platoPrincipalCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -93,7 +93,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.pedido-creado')
     pedidoCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -105,7 +105,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.repartidor-creado')
     repartidorCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -117,7 +117,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.cliente-creado')
     clienteCreado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -129,7 +129,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.estado-pedido-cambiado')
     estadoPedidoCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -141,7 +141,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.precio-pedido-cambiado')
     precioPedidoCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -153,7 +153,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.nombre-bebida-cambiado')
     nombreBebidaCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -165,7 +165,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.tamanio-bebida-cambiado')
     tamanioBebidaCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -177,7 +177,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.bebida-obtenida')
     bebidaObtenida(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
@@ -189,7 +189,7 @@ export class GenericSubscriberController{
     @EventPattern('entrega_a_domicilio.pedido-obtenido')
     pedidoObtenido(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 
-        this.crearEvento(data, context);
+        this.guardarEventEnMySql(data, context);
 
         console.log('--------------------------------------')
         console.log('Data: ', data)
