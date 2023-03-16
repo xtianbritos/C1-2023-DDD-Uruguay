@@ -8,10 +8,7 @@
  */
  export function EsDireccion(valor: string): boolean {
 
-    const regex = 
-    /^([A-Za-zÑñÁáÉéÍíÓóÚú0-9]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú0-9]+)(\s+([A-Za-zÑñÁáÉéÍíÓóÚú0-9]+['\-]{0,1}[A-Za-zÑñÁáÉéÍíÓóÚú0-9]+))*$/;
+    const regex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+\d*[a-zA-ZñÑáéíóúÁÉÍÓÚ\d\s]*$/;
 
-    const matches = valor.match(regex);
-
-    return matches != null ? true : false;
+    return regex.test(valor);
 }

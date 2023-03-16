@@ -15,7 +15,7 @@ describe('EsUuid', () => {
         const result = EsUuid(uuid);
 
         // Assert - Afirmar
-        expect(result).toBe(true);
+        expect(result).toBe(expected);
     });
 });
 
@@ -29,6 +29,6 @@ describe('EsUuid', () => {
         const result = EsUuid(uuid);
 
         // Assert - Afirmar
-        expect(result).toBe(false);
+        expect(result).toBe(expected);
     });
 });
