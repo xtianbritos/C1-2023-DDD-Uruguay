@@ -1,33 +1,64 @@
 import { EsPrecioValido } from "./es-precio-valido.validations";
 
-const validos = [15, 30, 450];
+
+const validos = [1, 30, 450];
 
 const invalidos = [0, -50, -4];
 
-describe('EsPrecioValido', () => {
-    it.each(validos) ('Debería ser un precio', (intento) => {
-        // Arange - Preparar
-        const precio = intento;
-        const expected = true;
-
-        // Act - Actuar
-        const result = EsPrecioValido(precio);
-
-        // Assert - Afirmar
-        expect(result).toBe(expected);
-    });
-});
 
 describe('EsPrecioValido', () => {
-    it.each(invalidos) ('No debería ser un precio', (intento) => {
-        // Arange - Preparar
-        const precio = intento;
-        const expected = false;
-
-        // Act - Actuar
-        const result = EsPrecioValido(precio);
-
-        // Assert - Afirmar
-        expect(result).toBe(expected);
+    let validador: typeof EsPrecioValido;
+  
+    // Antes de todas las pruebas
+    beforeAll(() => {});
+  
+    // Antes de cada prueba
+    beforeEach(() => {
+      // Arrange
+      validador = EsPrecioValido;
     });
-});
+  
+  
+    it('esto debería definir la función', () => {
+      // Assert
+      expect(validador).toBeDefined();
+    });
+  
+  
+    it.each(validos) ('debería ser verdadero', (intento) => {
+      // Arrange
+      const precio = intento;
+      const expected = true;
+  
+      // Act
+      const result = validador(precio);
+  
+      // Assert
+      expect(result).toEqual(expected);
+    })
+  
+  
+    it.each(invalidos) ('debería ser falso', (intento) => {
+      // Arrange
+      const precio = intento;
+      const expected = false;
+  
+      // Act
+      const result = validador(precio);
+  
+      // Assert
+      expect(result).toEqual(expected);
+    })
+  
+  
+    // Despues de cada prueba
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+  
+    // Despues de todas las pruebas
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
+  });
+  

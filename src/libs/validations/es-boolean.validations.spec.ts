@@ -1,33 +1,63 @@
 import { EsBoolean } from './es-boolean.validations';
 
+
 const validos = [true, false];
 
 const invalidos = [1, 'true', {}];
 
-describe('EsBoolean', () => {
-    it.each(validos) ('Debería ser un boolean', (intento) => {
-        // Arange - Preparar
-        const booleano = intento;
-        const expected = true;
-
-        // Act - Actuar
-        const result = EsBoolean(booleano);
-
-        // Assert - Afirmar
-        expect(result).toBe(expected);
-    });
-});
 
 describe('EsBoolean', () => {
-    it.each(invalidos) ('No debería ser un boolean', (intento) => {
-        // Arange - Preparar
-        const booleano = intento;
-        const expected = false;
+  let validador: typeof EsBoolean;
 
-        // Act - Actuar
-        const result = EsBoolean(booleano);
+  // Antes de todas las pruebas
+  beforeAll(() => {});
 
-        // Assert - Afirmar
-        expect(result).toBe(expected);
-    });
+  // Antes de cada prueba
+  beforeEach(() => {
+    // Arrange
+    validador = EsBoolean;
+  });
+
+
+  it('esto debería definir la función', () => {
+    // Assert
+    expect(validador).toBeDefined();
+  });
+
+
+  it.each(validos) ('debería ser verdadero', (intento) => {
+    // Arrange
+    const booleano = intento;
+    const expected = true;
+
+    // Act
+    const result = validador(booleano);
+
+    // Assert
+    expect(result).toEqual(expected);
+  })
+
+
+  it.each(invalidos) ('debería ser falso', (intento) => {
+    // Arrange
+    const booleano = intento;
+    const expected = false;
+
+    // Act
+    const result = validador(booleano);
+
+    // Assert
+    expect(result).toEqual(expected);
+  })
+
+
+  // Despues de cada prueba
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  // Despues de todas las pruebas
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
 });

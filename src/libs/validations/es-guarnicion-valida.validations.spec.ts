@@ -1,33 +1,64 @@
 import { EsGuarnicionValida } from "./es-guarnicion-valida.validations";
 
+
 const validos = ["arroz", "papas fritas", "puré de papas", "ensalada", "pan"];
 
-const invalidos = ["", "123", "esto no es una guarnicion válido"];
+const invalidos = ["", "123", "esto no es una guarnición válida"];
+
 
 describe('EsGuarnicionValida', () => {
-    it.each(validos) ('Debería ser una guarnicion', (intento) => {
-        // Arange - Preparar
-        const guarnicion = intento;
-        const expected = true;
-
-        // Act - Actuar
-        const result = EsGuarnicionValida(guarnicion);
-
-        // Assert - Afirmar
-        expect(result).toBe(expected);
+    let validador: typeof EsGuarnicionValida;
+  
+    // Antes de todas las pruebas
+    beforeAll(() => {});
+  
+    // Antes de cada prueba
+    beforeEach(() => {
+      // Arrange
+      validador = EsGuarnicionValida;
     });
-});
-
-describe('EsGuarnicionValida', () => {
-    it.each(invalidos) ('No debería ser una guarnicion', (intento) => {
-        // Arange - Preparar
-        const guarnicion = intento;
-        const expected = false;
-
-        // Act - Actuar
-        const result = EsGuarnicionValida(guarnicion);
-
-        // Assert - Afirmar
-        expect(result).toBe(expected);
+  
+  
+    it('esto debería definir la función', () => {
+      // Assert
+      expect(validador).toBeDefined();
     });
-});
+  
+  
+    it.each(validos) ('debería ser verdadero', (intento) => {
+      // Arrange
+      const guarnicion = intento;
+      const expected = true;
+  
+      // Act
+      const result = validador(guarnicion);
+  
+      // Assert
+      expect(result).toEqual(expected);
+    })
+  
+  
+    it.each(invalidos) ('debería ser falso', (intento) => {
+      // Arrange
+      const guarnicion = intento;
+      const expected = false;
+  
+      // Act
+      const result = validador(guarnicion);
+  
+      // Assert
+      expect(result).toEqual(expected);
+    })
+  
+  
+    // Despues de cada prueba
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+  
+    // Despues de todas las pruebas
+    afterAll(() => {
+      jest.restoreAllMocks();
+    });
+  });
+  
