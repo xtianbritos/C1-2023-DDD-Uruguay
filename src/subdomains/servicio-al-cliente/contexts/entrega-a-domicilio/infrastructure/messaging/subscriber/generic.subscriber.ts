@@ -197,4 +197,16 @@ export class GenericSubscriberController{
         console.log('Context: ', context)
         console.log('--------------------------------------')
     }
+
+    @EventPattern('entrega_a_domicilio.postre-obtenido')
+    postreObtenido(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
+
+        this.guardarEventEnMySql(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
 }

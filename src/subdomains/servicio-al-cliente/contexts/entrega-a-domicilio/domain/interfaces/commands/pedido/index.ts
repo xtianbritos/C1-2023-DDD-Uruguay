@@ -22,3 +22,4 @@ export * from './crear-bebida.command';
 export * from './crear-entrada.command';
 export * from './obtener-bebida.command';
 export * from './obtener-pedido.command';
+export * from './obtener-postre.command';

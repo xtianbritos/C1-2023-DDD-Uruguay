@@ -21,6 +21,7 @@ import {
 
     PedidoObtenidoPublisher,
     BebidaObtenidaPublisher,
+    PostreObtenidoPublisher,
 
 } from './publisher';
 
@@ -81,6 +82,7 @@ import { GenericSubscriberController } from './subscriber';
 
         PedidoObtenidoPublisher,
         BebidaObtenidaPublisher,
+        PostreObtenidoPublisher,
     ],
     exports: [
         PedidoCreadoPublisher,
@@ -100,6 +102,7 @@ import { GenericSubscriberController } from './subscriber';
 
         PedidoObtenidoPublisher,
         BebidaObtenidaPublisher,
+        PostreObtenidoPublisher,
     ]
 })
 export class MessagingModule { }

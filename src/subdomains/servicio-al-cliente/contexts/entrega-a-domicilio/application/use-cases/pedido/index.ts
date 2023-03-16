@@ -33,3 +33,5 @@ export * from './obtener-bebida.use-case';
 
 export * from './obtener-pedido.use-case';
 
+export * from './obtener-postre.use-case';
+

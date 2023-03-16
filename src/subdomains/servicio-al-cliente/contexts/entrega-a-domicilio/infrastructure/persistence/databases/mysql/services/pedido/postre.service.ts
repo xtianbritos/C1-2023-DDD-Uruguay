@@ -17,7 +17,7 @@ export class PostreMySqlService
         return this.postreRepository.create(postre);
     }
     
-    getPostre(postreId: string): Promise<PostreMySqlEntity> {
+    obtenerPostre(postreId: string): Promise<PostreMySqlEntity> {
         return this.postreRepository.findById(postreId);
     }
     

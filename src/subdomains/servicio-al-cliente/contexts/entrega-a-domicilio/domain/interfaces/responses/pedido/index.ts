@@ -13,6 +13,7 @@ export * from './nombre-plato-principal-cambiado.response';
 export * from './pedido-creado.response';
 export * from './pedido-obtenido.response';
 export * from './bebida-obtenida.response';
+export * from './postre-obtenido.response';
 export * from './plato-principal-creado.response';
 export * from './postre-creado.response';
 

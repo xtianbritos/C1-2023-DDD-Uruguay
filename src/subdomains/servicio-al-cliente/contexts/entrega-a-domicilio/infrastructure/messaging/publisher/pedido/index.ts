@@ -27,6 +27,8 @@ export * from './postre-creado.message-publisher';
 
 export * from './postre-es-para-veganos-cambiado.message-publisher';
 
+export * from './postre-obtenido.message-publisher';
+
 export * from './precio-pedido-cambiado.message-publisher';
 
 export * from './tamaño-bebida-cambiado.message-publisher';

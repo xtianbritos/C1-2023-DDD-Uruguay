@@ -11,7 +11,8 @@ import {
     CambiarEstadoPedidoUseCase,
     CambiarPrecioPedidoUseCase,
     CambiarNombreBebidaUseCase,
-    CambiarTamanioBebidaUseCase
+    CambiarTamanioBebidaUseCase,
+    ObtenerPostreUseCase
 } from '../../application';
 
 import {
@@ -33,7 +34,8 @@ import {
     CambiarEstadoPedidoCommand,
     CambiarPrecioPedidoCommand,
     CambiarNombreBebidaCommand,
-    CambiarTamanioBebidaCommand
+    CambiarTamanioBebidaCommand,
+    ObtenerPostreCommand
 } from '../utils/commands/pedido';
 
 import {
@@ -47,7 +49,8 @@ import {
     EstadoPedidoCambiadoPublisher,
     PrecioPedidoCambiadoPublisher,
     NombreBebidaCambiadoPublisher,
-    TamanioBebidaCambiadoPublisher
+    TamanioBebidaCambiadoPublisher,
+    PostreObtenidoPublisher
 } from '../messaging/publisher';
 
 @Controller('pedido')
@@ -72,7 +75,8 @@ export class PedidoController {
         private readonly tamanioBebidaCambiadoEventPublisherBase: TamanioBebidaCambiadoPublisher,
 
         private readonly postreService: PostreService,
-        private readonly postreCreadoEventPublisherBase: PostreCreadoPublisher
+        private readonly postreCreadoEventPublisherBase: PostreCreadoPublisher,
+        private readonly postreObtenidoEventPublisherBase: PostreObtenidoPublisher,
     ) {}
 
     // @Post('/crear-pedido')
@@ -135,6 +139,15 @@ export class PedidoController {
         const useCase = new ObtenerBebidaUseCase(
             this.bebidaService,
             this.bebidaObtenidaEventPublisherBase,
+        );
+        return await useCase.execute(command);
+    }
+
+    @Get('/obtener-postre')
+    async obtenerPostre(@Body() command: ObtenerPostreCommand) {
+        const useCase = new ObtenerPostreUseCase(
+            this.postreService,
+            this.postreObtenidoEventPublisherBase,
         );
         return await useCase.execute(command);
     }

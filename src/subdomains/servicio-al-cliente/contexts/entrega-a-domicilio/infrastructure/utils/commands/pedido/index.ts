@@ -14,3 +14,4 @@ export * from './crear-plato-principal.command';
 export * from './crear-postre.command';
 export * from './obtener-bebida.command';
 export * from './obtener-pedido.command';
+export * from './obtener-postre.command';
