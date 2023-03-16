@@ -162,6 +162,7 @@ export class PedidoController {
         const useCase = new CambiarNombreBebidaUseCase(
             this.bebidaService,
             this.nombreBebidaCambiadoEventPublisherBase,
+            this.bebidaObtenidaEventPublisherBase
         );
         return await useCase.execute(command);
     }
@@ -171,6 +172,7 @@ export class PedidoController {
         const useCase = new CambiarTamanioBebidaUseCase(
             this.bebidaService,
             this.tamanioBebidaCambiadoEventPublisherBase,
+            this.bebidaObtenidaEventPublisherBase
         );
         return await useCase.execute(command);
     }

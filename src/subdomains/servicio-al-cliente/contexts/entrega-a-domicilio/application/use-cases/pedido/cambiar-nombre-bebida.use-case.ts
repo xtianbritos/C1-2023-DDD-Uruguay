@@ -6,7 +6,7 @@ import { ICambiarNombreBebidaCommand, IObtenerBebidaCommand } from "../../../dom
 import { IBebidaObtenidaResponse, INombreBebidaCambiadoResponse } from "../../../domain/interfaces/responses/pedido";
 import { IBebidaDomainService } from "../../../domain/services";
 import { BebidaIdValueObject, NombreValueObject } from "../../../domain/value-objects/pedido";
-import { NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
+import { BebidaObtenidaEventPublisherBase, NombreBebidaCambiadoEventPublisherBase } from '../../../domain/events/publishers/pedido';
 import { ObtenerBebidaUseCase } from './obtener-bebida.use-case';
 
 
@@ -19,7 +19,7 @@ export class CambiarNombreBebidaUseCase<
 {
 
     private readonly pedidoAggregateRoot: PedidoAggregate;
-    private readonly ObtenerBebidaUseCase: ObtenerBebidaUseCase<
+    private readonly obtenerBebidaUseCase: ObtenerBebidaUseCase<
         IObtenerBebidaCommand,
         IBebidaObtenidaResponse
     >;
@@ -27,12 +27,17 @@ export class CambiarNombreBebidaUseCase<
     constructor(
         private readonly bebidaService?: IBebidaDomainService<BebidaDomainEntityBase>,
         private readonly nombreBebidaCambiadoEventPublisherBase?: NombreBebidaCambiadoEventPublisherBase,
+        private readonly bebidaObtenidaEventPublisherBase?: BebidaObtenidaEventPublisherBase,
     ) {
         super();
         this.pedidoAggregateRoot = new PedidoAggregate({
             bebidaService,
             nombreBebidaCambiadoEventPublisherBase
-        })
+        });
+        this.obtenerBebidaUseCase = new ObtenerBebidaUseCase(
+            bebidaService,
+            bebidaObtenidaEventPublisherBase
+        )
     }
 
     async execute(command?: Command): Promise<Response> {
@@ -86,8 +91,8 @@ export class CambiarNombreBebidaUseCase<
     private async obtenerEntityBebidaDomain(
         command: IObtenerBebidaCommand
     ): Promise<BebidaDomainEntityBase> {
-        const success = (await this.ObtenerBebidaUseCase.execute(command)).success;
-        const entity = (await this.ObtenerBebidaUseCase.execute(command)).data;
+        const success = (await this.obtenerBebidaUseCase.execute(command)).success;
+        const entity = (await this.obtenerBebidaUseCase.execute(command)).data;
 
         if (entity === null || success === false)
             throw new Error('No se ha podido obtener la entidad');
