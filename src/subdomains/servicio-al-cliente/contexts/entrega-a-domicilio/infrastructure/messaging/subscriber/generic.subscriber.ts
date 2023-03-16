@@ -174,6 +174,31 @@ export class GenericSubscriberController{
         console.log('--------------------------------------')
     }
 
+    @EventPattern('entrega_a_domicilio.tamanio-postre-cambiado')
+    tamanioPostreCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
+
+        this.guardarEventEnMySql(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+    @EventPattern('entrega_a_domicilio.postre-es-para-veganos-cambiado')
+    postreEsParaVeganosCambiado(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
+
+        this.guardarEventEnMySql(data, context);
+
+        console.log('--------------------------------------')
+        console.log('Data: ', data)
+        console.log('--------------------------------------')
+        console.log('Context: ', context)
+        console.log('--------------------------------------')
+    }
+
+
     @EventPattern('entrega_a_domicilio.bebida-obtenida')
     bebidaObtenida(@Payload() data: Idata, @Ctx() context: KafkaContext): void{
 

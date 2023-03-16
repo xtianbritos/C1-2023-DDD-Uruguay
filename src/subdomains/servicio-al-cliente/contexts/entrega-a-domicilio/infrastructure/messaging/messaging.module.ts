@@ -18,6 +18,7 @@ import {
     PrecioPedidoCambiadoPublisher,
     NombreBebidaCambiadoPublisher,
     TamanioBebidaCambiadoPublisher,
+    PostreEsParaVeganosCambiadoPublisher,
 
     PedidoObtenidoPublisher,
     BebidaObtenidaPublisher,
@@ -79,6 +80,7 @@ import { GenericSubscriberController } from './subscriber';
         PrecioPedidoCambiadoPublisher,
         NombreBebidaCambiadoPublisher,
         TamanioBebidaCambiadoPublisher,
+        PostreEsParaVeganosCambiadoPublisher,
 
         PedidoObtenidoPublisher,
         BebidaObtenidaPublisher,
@@ -99,7 +101,8 @@ import { GenericSubscriberController } from './subscriber';
         PrecioPedidoCambiadoPublisher,
         NombreBebidaCambiadoPublisher,
         TamanioBebidaCambiadoPublisher,
-
+        PostreEsParaVeganosCambiadoPublisher,
+        
         PedidoObtenidoPublisher,
         BebidaObtenidaPublisher,
         PostreObtenidoPublisher,

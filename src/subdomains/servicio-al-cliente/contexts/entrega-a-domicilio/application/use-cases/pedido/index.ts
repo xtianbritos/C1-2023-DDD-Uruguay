@@ -17,7 +17,9 @@ export * from './cambiar-precio-pedido.use-case';
 
 export * from './cambiar-tamaño-bebida.use-case';
 
+export * from './cambiar-tamaño-postre.use-case';
 
+export * from './cambiar-postre-es-para-veganos.use-case';
 
 export * from './crear-bebida.use-case';
 

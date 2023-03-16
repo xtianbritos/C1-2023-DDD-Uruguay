@@ -8,6 +8,7 @@ export * from './nombre-entrada-cambiado.response';
 export * from './nombre-postre-cambiado.response';
 export * from './nombre-plato-principal-cambiado.response';
 export * from './tamaño-postre-cambiado.response';
+export * from './postre-es-para-veganos-cambiado.response';
 
 
 

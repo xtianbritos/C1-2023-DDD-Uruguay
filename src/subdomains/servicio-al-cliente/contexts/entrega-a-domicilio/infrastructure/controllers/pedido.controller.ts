@@ -12,7 +12,9 @@ import {
     CambiarPrecioPedidoUseCase,
     CambiarNombreBebidaUseCase,
     CambiarTamanioBebidaUseCase,
-    ObtenerPostreUseCase
+    ObtenerPostreUseCase,
+    CambiarTamanioPostreUseCase,
+    CambiarPostreEsParaVeganosUseCase
 } from '../../application';
 
 import {
@@ -35,7 +37,9 @@ import {
     CambiarPrecioPedidoCommand,
     CambiarNombreBebidaCommand,
     CambiarTamanioBebidaCommand,
-    ObtenerPostreCommand
+    ObtenerPostreCommand,
+    CambiarPostreEsParaVeganosCommand,
+    CambiarTamanioPostreCommand
 } from '../utils/commands/pedido';
 
 import {
@@ -50,7 +54,8 @@ import {
     PrecioPedidoCambiadoPublisher,
     NombreBebidaCambiadoPublisher,
     TamanioBebidaCambiadoPublisher,
-    PostreObtenidoPublisher
+    PostreObtenidoPublisher,
+    PostreEsParaVeganosCambiadoPublisher
 } from '../messaging/publisher';
 
 @Controller('pedido')
@@ -77,6 +82,8 @@ export class PedidoController {
         private readonly postreService: PostreService,
         private readonly postreCreadoEventPublisherBase: PostreCreadoPublisher,
         private readonly postreObtenidoEventPublisherBase: PostreObtenidoPublisher,
+        private readonly tamanioPostreCambiadoEventPublisherBase: TamanioBebidaCambiadoPublisher,
+        private readonly postreEsParaVeganosCambiadoEventPublisherBase: PostreEsParaVeganosCambiadoPublisher,
     ) {}
 
     // @Post('/crear-pedido')
@@ -186,6 +193,26 @@ export class PedidoController {
             this.bebidaService,
             this.tamanioBebidaCambiadoEventPublisherBase,
             this.bebidaObtenidaEventPublisherBase
+        );
+        return await useCase.execute(command);
+    }
+
+    @Patch('/cambiar-tamanio-postre')
+    async cambiarTamanioPostre(@Body() command: CambiarTamanioPostreCommand) {
+        const useCase = new CambiarTamanioPostreUseCase(
+            this.postreService,
+            this.tamanioPostreCambiadoEventPublisherBase,
+            this.postreObtenidoEventPublisherBase
+        );
+        return await useCase.execute(command);
+    }
+
+    @Patch('/cambiar-postre-es-para-veganos')
+    async cambiarPostreEsParaVeganos(@Body() command: CambiarPostreEsParaVeganosCommand) {
+        const useCase = new CambiarPostreEsParaVeganosUseCase(
+            this.postreService,
+            this.postreEsParaVeganosCambiadoEventPublisherBase,
+            this.postreObtenidoEventPublisherBase
         );
         return await useCase.execute(command);
     }
