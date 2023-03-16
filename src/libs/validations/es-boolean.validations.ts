@@ -6,7 +6,7 @@
  * @param {boolean} valor
  * @return {*}  {boolean}
  */
-export function EsBoolean(valor: boolean): boolean {
+export function EsBoolean(valor: any): boolean {
 
     return typeof valor === 'boolean' ? true : false;
 }
