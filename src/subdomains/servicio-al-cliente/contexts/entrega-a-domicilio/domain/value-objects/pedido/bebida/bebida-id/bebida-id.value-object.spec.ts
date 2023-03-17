@@ -1,51 +1,67 @@
-import { v4 as uuid } from 'uuid';
+jest.mock('@validations')
 
-import { BebidaIdValueObject } from './';
+import { BebidaIdValueObject } from "."
+import * as validadores from '@validations';
 
-
-const validos = [undefined, '6650e6dd-b7cc-4426-af2c-0bb2730337e1', uuid()];
-
-const invalidos = ['1', '123-a' , 'abcD', '6650e6dd-b7cc-4426-af2c-0bb2730337e@'];
-
-
-describe('PlatoPrincipalId', () => {
-
+describe('BebidaIdValueObject', () => {
     let valueObject: BebidaIdValueObject;
 
     beforeEach(() => {
         valueObject = new BebidaIdValueObject();
+
+        jest.spyOn(validadores, 'EsUuid').mockImplementation(data => {
+            switch(data){
+                case 'e6e1974a-c7f3-45be-9105-31ef44d53cee':
+                    return true
+                case undefined:
+                    return true
+                default:
+                    return false
+            }
+        })
     });
 
-
-    it('Debería ser una instancia', () => {
+    it('should create an instance', () => {
         expect(valueObject).toBeDefined();
-    });
+    })
 
+    describe('checking the value of the object', () => {
 
-    it.each(validos) ('Debería ser válido', (intento) => {
-        // Arrange
-        const expectedHasErrors = false;
-        const data = intento;
-        
-        // Act
-        let bebidaId = new BebidaIdValueObject(data);
+        it('should return the expected data', () => {
 
-        // Assert
-        expect(bebidaId.hasErrors()).toBe(expectedHasErrors);
-    });
+            //Arrange
+            const expected = 'e6e1974a-c7f3-45be-9105-31ef44d53cee';
+            const data = 'e6e1974a-c7f3-45be-9105-31ef44d53cee';
 
+            //Act
+            valueObject = new BebidaIdValueObject(data)
+            const result = valueObject.valueOf();
+            valueObject.validateData()
 
-    it.each(invalidos) ('Debería ser inválido', (intento) => {
-        // Arrange
-        const expectedMessage = 'El id no tiene una estructura válida UUIDV4';
-        const expectedHasErrors = true;
-        const data = intento;
-        
-        // Act
-        let bebidaId = new BebidaIdValueObject(data);
+            //Assert
+            expect(validadores.EsUuid).toHaveBeenCalledWith(data)
+            expect(valueObject.hasErrors()).toBe(false)
+            expect(result).toBe(expected)
 
-        // Assert
-        expect(bebidaId.hasErrors()).toBe(expectedHasErrors);
-        expect(bebidaId.getErrors()[0].message).toBe(expectedMessage);
-    });
+        })
+    })
+    describe('checking the value of the object', () => {
+
+        it('should return an error expected data', () => {
+
+            //Arrange
+            const expected = 'El id no tiene una estructura válida UUIDV4';
+            const expectedError = true;
+            const data = '1';
+
+            //Act
+            valueObject = new BebidaIdValueObject(data)
+
+            //Assert
+            expect(validadores.EsUuid).toHaveBeenCalled()
+            expect(valueObject.hasErrors()).toBe(expectedError)
+            expect(valueObject.getErrors()[0].message).toBe(expected)
+
+        })
+    })
 })

@@ -1,5 +1,5 @@
 
-import { EventPublisherBase } from "src/libs";
+import { EventPublisherBase } from "../../../../../../../../libs/sofka/bases";
 import { PostreDomainEntityBase } from "../../../entities";
 
 

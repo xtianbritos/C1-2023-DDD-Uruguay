@@ -1,10 +1,10 @@
-import { BebidaDomainEntityBase } from "../../../entities/pedido";
-import { BebidaCreadaEventPublisherBase } from './';
+import { PostreDomainEntityBase } from "../../../entities/pedido";
+import { PostreCreadoEventPublisherBase } from './';
 import { IEventPublisher } from "../../../../../../../../libs/sofka/interface";
 
-class EventPublisher extends BebidaCreadaEventPublisherBase { }
+class EventPublisher extends PostreCreadoEventPublisherBase { }
 
-describe('GotBebidaEventPublisherBase', () => {
+describe('GotPostreEventPublisherBase', () => {
   let eventPublisher: EventPublisher;
   let publisher: IEventPublisher;
 
@@ -19,8 +19,8 @@ describe('GotBebidaEventPublisherBase', () => {
 
   it('should emit event', () => {
     // Arrange
-    const topic = 'entrega_a_domicilio.bebida-creada';
-    const response = new BebidaDomainEntityBase();
+    const topic = 'entrega_a_domicilio.postre-creado';
+    const response = new PostreDomainEntityBase();
     const data = JSON.stringify({ data: response });
     eventPublisher.response = response;
     jest.spyOn(publisher, 'emit');
@@ -32,3 +32,4 @@ describe('GotBebidaEventPublisherBase', () => {
     expect(publisher.emit).toBeCalledWith(topic, data);
   });
 });
+

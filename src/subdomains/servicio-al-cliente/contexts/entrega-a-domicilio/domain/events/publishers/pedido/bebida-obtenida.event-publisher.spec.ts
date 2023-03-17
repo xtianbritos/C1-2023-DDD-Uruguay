@@ -1,8 +1,8 @@
 import { BebidaDomainEntityBase } from "../../../entities/pedido";
-import { BebidaCreadaEventPublisherBase } from './';
+import { BebidaObtenidaEventPublisherBase } from './';
 import { IEventPublisher } from "../../../../../../../../libs/sofka/interface";
 
-class EventPublisher extends BebidaCreadaEventPublisherBase { }
+class EventPublisher extends BebidaObtenidaEventPublisherBase { }
 
 describe('GotBebidaEventPublisherBase', () => {
   let eventPublisher: EventPublisher;
@@ -19,7 +19,7 @@ describe('GotBebidaEventPublisherBase', () => {
 
   it('should emit event', () => {
     // Arrange
-    const topic = 'entrega_a_domicilio.bebida-creada';
+    const topic = 'entrega_a_domicilio.bebida-obtenida';
     const response = new BebidaDomainEntityBase();
     const data = JSON.stringify({ data: response });
     eventPublisher.response = response;

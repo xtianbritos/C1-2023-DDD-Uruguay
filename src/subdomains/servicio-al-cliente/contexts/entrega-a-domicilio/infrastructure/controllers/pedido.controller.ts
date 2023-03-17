@@ -38,9 +38,9 @@ import {
     CambiarPrecioPedidoCommand,
     CambiarNombreBebidaCommand,
     CambiarTamanioBebidaCommand,
+    CambiarTamanioPostreCommand,
     ObtenerPostreCommand,
     CambiarPostreEsParaVeganosCommand,
-    CambiarTamanioPostreCommand
 } from '../utils/commands/pedido';
 
 import {
@@ -55,6 +55,7 @@ import {
     PrecioPedidoCambiadoPublisher,
     NombreBebidaCambiadoPublisher,
     TamanioBebidaCambiadoPublisher,
+    TamanioPostreCambiadoPublisher,
     PostreObtenidoPublisher,
     PostreEsParaVeganosCambiadoPublisher
 } from '../messaging/publisher';
@@ -107,7 +108,7 @@ export class PedidoController {
         private readonly postreService: PostreService,
         private readonly postreCreadoEventPublisherBase: PostreCreadoPublisher,
         private readonly postreObtenidoEventPublisherBase: PostreObtenidoPublisher,
-        private readonly tamanioPostreCambiadoEventPublisherBase: TamanioBebidaCambiadoPublisher,
+        private readonly tamanioPostreCambiadoEventPublisherBase: TamanioPostreCambiadoPublisher,
         private readonly postreEsParaVeganosCambiadoEventPublisherBase: PostreEsParaVeganosCambiadoPublisher,
     ) {}
 

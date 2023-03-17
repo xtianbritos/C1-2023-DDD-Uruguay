@@ -4,6 +4,12 @@ import { Ctx, EventPattern, KafkaContext, Payload } from "@nestjs/microservices"
 import { EventMySqlEntity, EventMySqlService } from "../../persistence";
 
 
+/**
+ *Interfáz para poder extraer la data más cómodamente
+ *
+ * @export
+ * @interface Idata
+ */
 export interface Idata {
     data: Object
 }
@@ -14,6 +20,14 @@ export class GenericSubscriberController{
 
     constructor(private readonly eventService?: EventMySqlService) {}
 
+    /**
+     *Método que utiliza el service de la entidad Event para guardar un evento
+     *
+     * @param {Idata} data
+     * @param {KafkaContext} context
+     * @return {*}  {Promise<void>}
+     * @memberof GenericSubscriberController
+     */
     async guardarEventEnMySql(data: Idata, context: KafkaContext): Promise<void> {
 
         await this.eventService.crearEvent(
