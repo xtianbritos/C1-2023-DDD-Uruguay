@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, Param, Patch } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import {
     CrearPedidoUseCase,
@@ -58,6 +59,7 @@ import {
     PostreEsParaVeganosCambiadoPublisher
 } from '../messaging/publisher';
 
+@ApiTags('pedido') 
 @Controller('pedido')
 export class PedidoController {
     constructor(
@@ -141,8 +143,9 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
-    @Get('/obtener-bebida')
-    async obtenerBebida(@Body() command: ObtenerBebidaCommand) {
+    @Get('/obtener-bebida/:id')
+    async obtenerBebida(@Param('id') id: string) {
+        const command: ObtenerBebidaCommand = {bebidaId: id};
         const useCase = new ObtenerBebidaUseCase(
             this.bebidaService,
             this.bebidaObtenidaEventPublisherBase,
@@ -150,8 +153,10 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
-    @Get('/obtener-postre')
-    async obtenerPostre(@Body() command: ObtenerPostreCommand) {
+    @Get('/obtener-postre/:id')
+    async obtenerPostre(@Param('id') id: string) {
+        const command: ObtenerPostreCommand = {postreId: id};
+
         const useCase = new ObtenerPostreUseCase(
             this.postreService,
             this.postreObtenidoEventPublisherBase,

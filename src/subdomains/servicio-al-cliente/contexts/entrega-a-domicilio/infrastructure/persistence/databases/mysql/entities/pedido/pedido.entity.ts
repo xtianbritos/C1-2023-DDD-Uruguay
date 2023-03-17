@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToMany, JoinColumn } from "typeorm"
+import { ApiProperty } from '@nestjs/swagger'; 
 
 import { PedidoDomainEntityBase } from '../../../../../../domain/entities';
 import { TicketMySqlEntity } from "../ticket";
@@ -12,15 +13,19 @@ import {
 @Entity()
 export class PedidoMySqlEntity extends PedidoDomainEntityBase {
 
+    @ApiProperty({ example: '4a36baf5-0c45-40cb-a066-5fcc053ffa45' })
     @PrimaryGeneratedColumn('uuid')
     pedidoId?: string;
 
+    @ApiProperty({ example: 'preparándose' })
     @Column()
     estado?: string;
-    
+
+    @ApiProperty({ example: 154 })
     @Column()
     precio?: number;
 
+    @ApiProperty({ example: new Date() })
     @Column({ type: 'datetime' })
     createdAt?: number | Date;
 

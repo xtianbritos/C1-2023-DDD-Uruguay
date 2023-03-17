@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import {
     CrearClienteUseCase,
@@ -24,6 +25,7 @@ import {
 } from '../messaging/publisher';
 
 
+@ApiTags('ticket') 
 @Controller('ticket')
 export class TicketController {
     constructor(
