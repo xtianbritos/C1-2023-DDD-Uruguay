@@ -88,14 +88,6 @@ export class PedidoController {
         private readonly postreEsParaVeganosCambiadoEventPublisherBase: PostreEsParaVeganosCambiadoPublisher,
     ) {}
 
-    // @Post('/crear-pedido')
-    // async crearPedido(@Body() command: CrearPedidoCommand) {
-    //     const useCase = new CrearPedidoUseCase(
-    //         this.pedidoService,
-    //         this.pedidoCreadoEventPublisherBase,
-    //     );
-    //     return await useCase.execute(command);
-    // }
 
     @Post('/crear-entrada')
     async crearEntrada(@Body() command: CrearEntradaCommand) {
@@ -134,8 +126,9 @@ export class PedidoController {
     }
 
 
-    @Get('/obtener-pedido')
-    async obtenerPedido(@Body() command: ObtenerPedidoCommand) {
+    @Get('/obtener-pedido/:id')
+    async obtenerPedido(@Param('id') id: string) {
+        const command: ObtenerPedidoCommand = {pedidoId: id};
         const useCase = new ObtenerPedidoUseCase(
             this.pedidoService,
             this.pedidoObtenidoEventPublisherBase,
@@ -156,7 +149,6 @@ export class PedidoController {
     @Get('/obtener-postre/:id')
     async obtenerPostre(@Param('id') id: string) {
         const command: ObtenerPostreCommand = {postreId: id};
-
         const useCase = new ObtenerPostreUseCase(
             this.postreService,
             this.postreObtenidoEventPublisherBase,
