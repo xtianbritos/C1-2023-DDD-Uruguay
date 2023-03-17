@@ -59,6 +59,22 @@ import {
     PostreEsParaVeganosCambiadoPublisher
 } from '../messaging/publisher';
 
+import {
+    IBebidaCreadaResponse,
+    IBebidaObtenidaResponse,
+    IEntradaCreadaResponse,
+    IEstadoPedidoCambiadoResponse,
+    INombreBebidaCambiadoResponse,
+    IPedidoObtenidoResponse,
+    IPlatoPrincipalCreadoResponse,
+    IPostreCreadoResponse,
+    IPostreEsParaVeganosCambiadoResponse,
+    IPostreObtenidoResponse,
+    IPrecioPedidoCambiadoResponse,
+    ITamanioBebidaCambiadoResponse,
+    ITamanioPostreCambiadoResponse
+} from '../../domain/interfaces/responses';
+
 @ApiTags('pedido') 
 @Controller('pedido')
 export class PedidoController {
@@ -90,7 +106,7 @@ export class PedidoController {
 
 
     @Post('/crear-entrada')
-    async crearEntrada(@Body() command: CrearEntradaCommand) {
+    async crearEntrada(@Body() command: CrearEntradaCommand): Promise<IEntradaCreadaResponse> {
         const useCase = new CrearEntradaUseCase(
             this.entradaService,
             this.entradaCreadaEventPublisherBase,
@@ -99,7 +115,7 @@ export class PedidoController {
     }
 
     @Post('/crear-plato-principal')
-    async crearPlatoPrincipal(@Body() command: CrearPlatoPrincipalCommand) {
+    async crearPlatoPrincipal(@Body() command: CrearPlatoPrincipalCommand): Promise<IPlatoPrincipalCreadoResponse> {
         const useCase = new CrearPlatoPrincipalUseCase(
             this.platoPrincipalService,
             this.platoPrincipalCreadoEventPublisherBase,
@@ -108,7 +124,7 @@ export class PedidoController {
     }
 
     @Post('/crear-postre')
-    async crearPostre(@Body() command: CrearPostreCommand) {
+    async crearPostre(@Body() command: CrearPostreCommand): Promise<IPostreCreadoResponse> {
         const useCase = new CrearPostreUseCase(
             this.postreService,
             this.postreCreadoEventPublisherBase,
@@ -117,7 +133,7 @@ export class PedidoController {
     }
 
     @Post('/crear-bebida')
-    async crearBebida(@Body() command: CrearBebidaCommand) {
+    async crearBebida(@Body() command: CrearBebidaCommand): Promise<IBebidaCreadaResponse> {
         const useCase = new CrearBebidaUseCase(
             this.bebidaService,
             this.bebidaCreadaEventPublisherBase,
@@ -127,7 +143,7 @@ export class PedidoController {
 
 
     @Get('/obtener-pedido/:id')
-    async obtenerPedido(@Param('id') id: string) {
+    async obtenerPedido(@Param('id') id: string): Promise<IPedidoObtenidoResponse> {
         const command: ObtenerPedidoCommand = {pedidoId: id};
         const useCase = new ObtenerPedidoUseCase(
             this.pedidoService,
@@ -137,7 +153,7 @@ export class PedidoController {
     }
 
     @Get('/obtener-bebida/:id')
-    async obtenerBebida(@Param('id') id: string) {
+    async obtenerBebida(@Param('id') id: string): Promise<IBebidaObtenidaResponse> {
         const command: ObtenerBebidaCommand = {bebidaId: id};
         const useCase = new ObtenerBebidaUseCase(
             this.bebidaService,
@@ -147,7 +163,7 @@ export class PedidoController {
     }
 
     @Get('/obtener-postre/:id')
-    async obtenerPostre(@Param('id') id: string) {
+    async obtenerPostre(@Param('id') id: string): Promise<IPostreObtenidoResponse> {
         const command: ObtenerPostreCommand = {postreId: id};
         const useCase = new ObtenerPostreUseCase(
             this.postreService,
@@ -157,7 +173,7 @@ export class PedidoController {
     }
 
     @Patch('/cambiar-estado-pedido')
-    async cambiarEstadoPedido(@Body() command: CambiarEstadoPedidoCommand) {
+    async cambiarEstadoPedido(@Body() command: CambiarEstadoPedidoCommand): Promise<IEstadoPedidoCambiadoResponse> {
         const useCase = new CambiarEstadoPedidoUseCase(
             this.pedidoService,
             this.estadoPedidoCambiadoEventPublisherBase,
@@ -166,7 +182,7 @@ export class PedidoController {
     }
 
     @Patch('/cambiar-precio-pedido')
-    async cambiarPrecioPedido(@Body() command: CambiarPrecioPedidoCommand) {
+    async cambiarPrecioPedido(@Body() command: CambiarPrecioPedidoCommand): Promise<IPrecioPedidoCambiadoResponse> {
         const useCase = new CambiarPrecioPedidoUseCase(
             this.pedidoService,
             this.precioPedidoCambiadoEventPublisherBase,
@@ -175,7 +191,7 @@ export class PedidoController {
     }
 
     @Patch('/cambiar-nombre-bebida')
-    async cambiarNombreBebida(@Body() command: CambiarNombreBebidaCommand) {
+    async cambiarNombreBebida(@Body() command: CambiarNombreBebidaCommand): Promise<INombreBebidaCambiadoResponse> {
         const useCase = new CambiarNombreBebidaUseCase(
             this.bebidaService,
             this.nombreBebidaCambiadoEventPublisherBase,
@@ -185,7 +201,7 @@ export class PedidoController {
     }
 
     @Patch('/cambiar-tamanio-bebida')
-    async cambiarTamanioBebida(@Body() command: CambiarTamanioBebidaCommand) {
+    async cambiarTamanioBebida(@Body() command: CambiarTamanioBebidaCommand): Promise<ITamanioBebidaCambiadoResponse> {
         const useCase = new CambiarTamanioBebidaUseCase(
             this.bebidaService,
             this.tamanioBebidaCambiadoEventPublisherBase,
@@ -195,7 +211,7 @@ export class PedidoController {
     }
 
     @Patch('/cambiar-tamanio-postre')
-    async cambiarTamanioPostre(@Body() command: CambiarTamanioPostreCommand) {
+    async cambiarTamanioPostre(@Body() command: CambiarTamanioPostreCommand): Promise<ITamanioPostreCambiadoResponse> {
         const useCase = new CambiarTamanioPostreUseCase(
             this.postreService,
             this.tamanioPostreCambiadoEventPublisherBase,
@@ -205,7 +221,7 @@ export class PedidoController {
     }
 
     @Patch('/cambiar-postre-es-para-veganos')
-    async cambiarPostreEsParaVeganos(@Body() command: CambiarPostreEsParaVeganosCommand) {
+    async cambiarPostreEsParaVeganos(@Body() command: CambiarPostreEsParaVeganosCommand): Promise<IPostreEsParaVeganosCambiadoResponse> {
         const useCase = new CambiarPostreEsParaVeganosUseCase(
             this.postreService,
             this.postreEsParaVeganosCambiadoEventPublisherBase,

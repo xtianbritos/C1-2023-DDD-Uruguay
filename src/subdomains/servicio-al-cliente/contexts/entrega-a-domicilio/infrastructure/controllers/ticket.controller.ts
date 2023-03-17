@@ -24,6 +24,8 @@ import {
     TicketCreadoPublisher
 } from '../messaging/publisher';
 
+import { IClienteCreadoResponse, IRepartidorCreadoResponse } from '../../domain/interfaces/responses';
+
 
 @ApiTags('ticket') 
 @Controller('ticket')
@@ -39,17 +41,9 @@ export class TicketController {
         private readonly repartidorCreadoEventPublisherBase: RepartidorCreadoPublisher,
     ) {}
 
-    // @Post('/crear-ticket')
-    // async crearTicket(@Body() command: CrearTicketCommand) {
-    //     const useCase = new CrearTicketUseCase(
-    //         this.ticketService,
-    //         this.ticketCreadoEventPublisherBase,
-    //     );
-    //     return await useCase.execute(command);
-    // }
 
     @Post('/crear-cliente')
-    async crearCliente(@Body() command: CrearClienteCommand) {
+    async crearCliente(@Body() command: CrearClienteCommand): Promise<IClienteCreadoResponse> {
         const useCase = new CrearClienteUseCase(
             this.clienteService,
             this.clienteCreadoEventPublisherBase,
@@ -58,7 +52,7 @@ export class TicketController {
     }
 
     @Post('/crear-repartidor')
-    async crearRepartidor(@Body() command: CrearRepartidorCommand) {
+    async crearRepartidor(@Body() command: CrearRepartidorCommand): Promise<IRepartidorCreadoResponse> {
         const useCase = new CrearRepartidorUseCase(
             this.repartidorService,
             this.repartidorCreadoEventPublisherBase,
