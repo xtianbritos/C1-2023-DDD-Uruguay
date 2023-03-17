@@ -75,6 +75,13 @@ import {
     ITamanioPostreCambiadoResponse
 } from '../../domain/interfaces/responses';
 
+
+/**
+ *Controlador del agregado Pedido
+ *
+ * @export
+ * @class PedidoController
+ */
 @ApiTags('pedido') 
 @Controller('pedido')
 export class PedidoController {
@@ -105,6 +112,13 @@ export class PedidoController {
     ) {}
 
 
+    /**
+     *Método para crear una entidad Entrada
+     *
+     * @param {CrearEntradaCommand} command
+     * @return {*}  {Promise<IEntradaCreadaResponse>}
+     * @memberof PedidoController
+     */
     @Post('/crear-entrada')
     async crearEntrada(@Body() command: CrearEntradaCommand): Promise<IEntradaCreadaResponse> {
         const useCase = new CrearEntradaUseCase(
@@ -114,6 +128,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para crear una entidad Plato principal
+     *
+     * @param {CrearPlatoPrincipalCommand} command
+     * @return {*}  {Promise<IPlatoPrincipalCreadoResponse>}
+     * @memberof PedidoController
+     */
     @Post('/crear-plato-principal')
     async crearPlatoPrincipal(@Body() command: CrearPlatoPrincipalCommand): Promise<IPlatoPrincipalCreadoResponse> {
         const useCase = new CrearPlatoPrincipalUseCase(
@@ -123,6 +144,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para crear una entidad Postre
+     *
+     * @param {CrearPostreCommand} command
+     * @return {*}  {Promise<IPostreCreadoResponse>}
+     * @memberof PedidoController
+     */
     @Post('/crear-postre')
     async crearPostre(@Body() command: CrearPostreCommand): Promise<IPostreCreadoResponse> {
         const useCase = new CrearPostreUseCase(
@@ -132,6 +160,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para crear una entidad Bebida
+     *
+     * @param {CrearBebidaCommand} command
+     * @return {*}  {Promise<IBebidaCreadaResponse>}
+     * @memberof PedidoController
+     */
     @Post('/crear-bebida')
     async crearBebida(@Body() command: CrearBebidaCommand): Promise<IBebidaCreadaResponse> {
         const useCase = new CrearBebidaUseCase(
@@ -142,6 +177,13 @@ export class PedidoController {
     }
 
 
+    /**
+     *Método para obtener una entidad Pedido
+     *
+     * @param {string} id
+     * @return {*}  {Promise<IPedidoObtenidoResponse>}
+     * @memberof PedidoController
+     */
     @Get('/obtener-pedido/:id')
     async obtenerPedido(@Param('id') id: string): Promise<IPedidoObtenidoResponse> {
         const command: ObtenerPedidoCommand = {pedidoId: id};
@@ -152,6 +194,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para obtener una entidad Bebida
+     *
+     * @param {string} id
+     * @return {*}  {Promise<IBebidaObtenidaResponse>}
+     * @memberof PedidoController
+     */
     @Get('/obtener-bebida/:id')
     async obtenerBebida(@Param('id') id: string): Promise<IBebidaObtenidaResponse> {
         const command: ObtenerBebidaCommand = {bebidaId: id};
@@ -162,6 +211,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para obtener una entidad Postre
+     *
+     * @param {string} id
+     * @return {*}  {Promise<IPostreObtenidoResponse>}
+     * @memberof PedidoController
+     */
     @Get('/obtener-postre/:id')
     async obtenerPostre(@Param('id') id: string): Promise<IPostreObtenidoResponse> {
         const command: ObtenerPostreCommand = {postreId: id};
@@ -172,6 +228,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para cambiar el estado a una entidad Pedido
+     *
+     * @param {CambiarEstadoPedidoCommand} command
+     * @return {*}  {Promise<IEstadoPedidoCambiadoResponse>}
+     * @memberof PedidoController
+     */
     @Patch('/cambiar-estado-pedido')
     async cambiarEstadoPedido(@Body() command: CambiarEstadoPedidoCommand): Promise<IEstadoPedidoCambiadoResponse> {
         const useCase = new CambiarEstadoPedidoUseCase(
@@ -181,6 +244,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para cambiar el precio a una entidad Pedido
+     *
+     * @param {CambiarPrecioPedidoCommand} command
+     * @return {*}  {Promise<IPrecioPedidoCambiadoResponse>}
+     * @memberof PedidoController
+     */
     @Patch('/cambiar-precio-pedido')
     async cambiarPrecioPedido(@Body() command: CambiarPrecioPedidoCommand): Promise<IPrecioPedidoCambiadoResponse> {
         const useCase = new CambiarPrecioPedidoUseCase(
@@ -190,6 +260,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para cambiar el nombre a una entidad Bebida
+     *
+     * @param {CambiarNombreBebidaCommand} command
+     * @return {*}  {Promise<INombreBebidaCambiadoResponse>}
+     * @memberof PedidoController
+     */
     @Patch('/cambiar-nombre-bebida')
     async cambiarNombreBebida(@Body() command: CambiarNombreBebidaCommand): Promise<INombreBebidaCambiadoResponse> {
         const useCase = new CambiarNombreBebidaUseCase(
@@ -200,6 +277,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para cambiar el tamaño a una entidad Bebida
+     *
+     * @param {CambiarTamanioBebidaCommand} command
+     * @return {*}  {Promise<ITamanioBebidaCambiadoResponse>}
+     * @memberof PedidoController
+     */
     @Patch('/cambiar-tamanio-bebida')
     async cambiarTamanioBebida(@Body() command: CambiarTamanioBebidaCommand): Promise<ITamanioBebidaCambiadoResponse> {
         const useCase = new CambiarTamanioBebidaUseCase(
@@ -210,6 +294,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para cambiar el tamaño a una entidad Postre
+     *
+     * @param {CambiarTamanioPostreCommand} command
+     * @return {*}  {Promise<ITamanioPostreCambiadoResponse>}
+     * @memberof PedidoController
+     */
     @Patch('/cambiar-tamanio-postre')
     async cambiarTamanioPostre(@Body() command: CambiarTamanioPostreCommand): Promise<ITamanioPostreCambiadoResponse> {
         const useCase = new CambiarTamanioPostreUseCase(
@@ -220,6 +311,13 @@ export class PedidoController {
         return await useCase.execute(command);
     }
 
+    /**
+     *Método para cambiar si una entidad Postre es para veganos
+     *
+     * @param {CambiarPostreEsParaVeganosCommand} command
+     * @return {*}  {Promise<IPostreEsParaVeganosCambiadoResponse>}
+     * @memberof PedidoController
+     */
     @Patch('/cambiar-postre-es-para-veganos')
     async cambiarPostreEsParaVeganos(@Body() command: CambiarPostreEsParaVeganosCommand): Promise<IPostreEsParaVeganosCambiadoResponse> {
         const useCase = new CambiarPostreEsParaVeganosUseCase(

@@ -27,6 +27,12 @@ import {
 import { IClienteCreadoResponse, IRepartidorCreadoResponse } from '../../domain/interfaces/responses';
 
 
+/**
+ *Controlador del agregado Ticket
+ *
+ * @export
+ * @class TicketController
+ */
 @ApiTags('ticket') 
 @Controller('ticket')
 export class TicketController {
@@ -42,6 +48,13 @@ export class TicketController {
     ) {}
 
 
+    /**
+     *Método para crear una entidad Cliente
+     *
+     * @param {CrearClienteCommand} command
+     * @return {*}  {Promise<IClienteCreadoResponse>}
+     * @memberof TicketController
+     */
     @Post('/crear-cliente')
     async crearCliente(@Body() command: CrearClienteCommand): Promise<IClienteCreadoResponse> {
         const useCase = new CrearClienteUseCase(
@@ -51,6 +64,14 @@ export class TicketController {
         return await useCase.execute(command);
     }
 
+
+    /**
+     *Método para crear una entidad Repartidor
+     *
+     * @param {CrearRepartidorCommand} command
+     * @return {*}  {Promise<IRepartidorCreadoResponse>}
+     * @memberof TicketController
+     */
     @Post('/crear-repartidor')
     async crearRepartidor(@Body() command: CrearRepartidorCommand): Promise<IRepartidorCreadoResponse> {
         const useCase = new CrearRepartidorUseCase(
